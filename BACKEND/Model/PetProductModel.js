@@ -42,4 +42,4 @@ const productSchema = new Schema({
 
 });
 
-module.exports = mongoose.model("petProductModel", productSchema);
+module.exports = mongoose.model("petproduct", productSchema);
