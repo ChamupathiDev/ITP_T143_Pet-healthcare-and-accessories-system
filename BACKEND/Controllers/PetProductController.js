@@ -1,4 +1,4 @@
-const product = require("../BACKEND/Model/PetProductModel");
+const product = require("../Model/PetProductModel");
 
 const getAllproducts = async(req, res, next) =>{
 

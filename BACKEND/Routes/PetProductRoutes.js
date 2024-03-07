@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 //Insert Model
-const product = require("../BACKEND/Model/PetProductModel");
+const product = require("../Model/PetProductModel");
 //Insert product Controller
-const PetProductController = require("../BACKEND/Controllers/PetProductController");
+const PetProductController = require("../Controllers/PetProductController");
 
-router.get("/",PetProductController.getAllproducts);
+router.get("/getAll",PetProductController.getAllproducts);
 
 module.exports = router;
