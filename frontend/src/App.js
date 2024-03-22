@@ -1,10 +1,11 @@
-import logo from './logo.svg';
+
 import './App.css';
+import ProductDashboard from './Components/Products/ProductDashboard';
 
 function App() {
   return (
     <div className="App">
-      <h1>Chamupathi</h1>
+      <ProductDashboard></ProductDashboard>
     </div>
   );
 }
