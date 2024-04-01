@@ -11,7 +11,7 @@ function sideBar() {
       </div>
     </section>
   </React.Fragment>
-  )
+  );
 }
 
 export default sideBar

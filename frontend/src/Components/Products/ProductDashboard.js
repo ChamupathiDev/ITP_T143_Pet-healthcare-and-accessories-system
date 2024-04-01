@@ -1,6 +1,5 @@
 import React from "react";
 import Nav from "../Nav/Nav";
-import sideBar from "../sideBar/sideBar";
 
 
 function ProductDashboard() {
@@ -14,7 +13,7 @@ function ProductDashboard() {
 
       <section>
         <div>
-          <sideBar />
+         
 
         </div>
       </section>
