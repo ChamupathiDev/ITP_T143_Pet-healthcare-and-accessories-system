@@ -5,7 +5,9 @@ function DisplayPromotion() {
   return (
     <div>
       <Nav/>
+      
     </div>
+    
   )
 }
 

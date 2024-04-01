@@ -1,17 +1,28 @@
-import React from 'react'
+import React from "react";
+import { SidebarData } from "../../data/SidebarData";
+import {NavLink} from "react-router-dom";
 
 function sideBar() {
   return (
     <React.Fragment>
-    <section>
-      <div className='grid grid-cols-12' >
-        <div className='col-span-3 bg-customBlue h-screen pl-2'>
+      <section>
+        <div className="text-white">
+          {SidebarData.map((item, index) => {
+            return (
+              <div key={index}>
+                <NavLink to={item.path} className="hover:bg-red-500 pl-2 mt-7 w-full h-14 flex justify-start items-center text-white text-2xl space-x-1 font-bold">
+                  <span>{item.icon}</span>
+                  <span>{item.title}</span>
+                  </NavLink>
+                </div>
+               
+            )
+          })
+          }
         </div>
-        <div></div>
-      </div>
-    </section>
-  </React.Fragment>
+      </section>
+    </React.Fragment>
   );
 }
 
-export default sideBar
+export default sideBar;

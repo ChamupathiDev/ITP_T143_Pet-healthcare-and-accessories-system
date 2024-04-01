@@ -1,5 +1,8 @@
 import React from "react";
 import Nav from "../Nav/Nav";
+import Sidebar from "../Sidebar/Sidebar";
+import Sidepage from "../Sidebar/Sidepage";
+
 
 
 function ProductDashboard() {
@@ -12,11 +15,14 @@ function ProductDashboard() {
       </section>
 
       <section>
-        <div>
-         
-
+      <div className='grid grid-cols-12' >
+        <div className='col-span-2 bg-customBlue h-screen pl-2'>
+          <Sidebar/>
         </div>
-      </section>
+       <div><Sidepage/></div>
+      </div>
+    </section>
+      
     </React.Fragment>
   );
 }
