@@ -1,12 +1,14 @@
 
 import './App.css';
 import ProductDashboard from './Components/Products/ProductDashboard';
+import React from 'react'
 
 function App() {
   return (
-    <div className="App">
+    <React.Fragment>
       <ProductDashboard/>
-    </div>
+
+      </React.Fragment>
   );
 }
 

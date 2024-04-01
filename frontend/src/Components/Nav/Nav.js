@@ -1,24 +1,20 @@
-import React from 'react'
-import './Nav.css';
+import React from "react";
+
 
 
 function Nav() {
   return (
-    <div>
-       <ul className="text-3xl font-bold ">
-        <li className="text-3xl font-bold underline">
-            <h1>Dashboard</h1>
-        </li>
-        <li className="text-3xl font-bold underline">
-            <h1>Add product</h1>
-        </li>
-        <li className="text-3xl font-bold underline">
-            <h1>product details</h1>
-            </li>
-       </ul>
-      
-    </div>
-  )
+    <React.Fragment>
+      <section>
+        <div className= 'bg-customBlue h-20 w-full flex items-center justify-center h-12  '>
+          <div>
+            <h1 className=" font-Kanit font-bold text-white text-3xl">PetPulse</h1>
+          </div>
+          <div></div>
+        </div>
+      </section>
+    </React.Fragment>
+  );
 }
 
-export default Nav
+export default Nav;

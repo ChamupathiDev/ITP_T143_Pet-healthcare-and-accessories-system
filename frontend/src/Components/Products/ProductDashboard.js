@@ -1,13 +1,25 @@
-import React from 'react'
-import Nav from '../Nav/Nav'
+import React from "react";
+import Nav from "../Nav/Nav";
+import sideBar from "../sideBar/sideBar";
+
 
 function ProductDashboard() {
   return (
-    <div>
-        <Nav/>
-      
-    </div>
-  )
+    <React.Fragment>
+      <section>
+        <div>
+          <Nav />
+        </div>
+      </section>
+
+      <section>
+        <div>
+          <sideBar />
+
+        </div>
+      </section>
+    </React.Fragment>
+  );
 }
 
-export default ProductDashboard
+export default ProductDashboard;
