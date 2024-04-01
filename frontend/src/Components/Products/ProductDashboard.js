@@ -1,7 +1,9 @@
 import React from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import Sidepage from "../Sidebar/Sidepage";
+
+
+
 
 
 
@@ -19,7 +21,7 @@ function ProductDashboard() {
         <div className='col-span-2 bg-customBlue h-screen pl-2'>
           <Sidebar/>
         </div>
-       <div><Sidepage/></div>
+        <div className='font-bold text-2xl pl-2'>Dashboard</div>
       </div>
     </section>
       

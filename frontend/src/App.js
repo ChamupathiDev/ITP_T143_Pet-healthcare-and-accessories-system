@@ -1,14 +1,36 @@
-
-
+import { Route,Routes } from 'react-router';
 import './App.css';
 import ProductDashboard from './Components/Products/ProductDashboard';
 import React from 'react'
+import Displayproduct from './Components/MProduct/Displayproduct';
+import DisplayPromotion from './Components/Promotions/DisplayPromotion';
+import Discount from './Components/Discount/Discount';
+import Report from './Components/Report/Report';
+import Reorder from './Components/Reorder/Reorder';
+
 
 
 function App() {
   return (
     <React.Fragment>
-      <ProductDashboard/>
+     <section>
+     <Routes>
+        <Route path="/" element={<ProductDashboard/>}/>
+        <Route path="/pdashboard" element={<ProductDashboard/>}/>
+        <Route path="/dispalyproduct" element={<Displayproduct/>}/>
+        <Route path="/displaypromotion" element={<DisplayPromotion/>}/>
+        <Route path="/discount" element={<Discount/>}/>
+        <Route path="/report" element={<Report/>}/>
+        <Route path="/reorder" element={<Reorder/>}/>
+        
+
+
+
+      </Routes>
+     </section>
+     
+      
+      
       
 
       </React.Fragment>
