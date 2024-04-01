@@ -5,7 +5,7 @@ function ProductDashboard() {
   return (
     <div>
         <Nav/>
-      <h1>hi</h1>
+      
     </div>
   )
 }

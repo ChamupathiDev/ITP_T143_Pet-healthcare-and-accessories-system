@@ -5,7 +5,7 @@ import ProductDashboard from './Components/Products/ProductDashboard';
 function App() {
   return (
     <div className="App">
-      <ProductDashboard></ProductDashboard>
+      <ProductDashboard/>
     </div>
   );
 }
