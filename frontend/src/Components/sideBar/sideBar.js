@@ -3,6 +3,8 @@ import { SidebarData } from "../../data/SidebarData";
 import {NavLink} from "react-router-dom";
 
 function sideBar() {
+  const activeLink = 'hover:bg-red-500 mt-7 pl-7 w-full h-14 flex justify-start items-center text-white text-2xl space-x-l font-bold bg-red-500'
+  const normalLink = 'hover:bg-red-500 mt-7 pl-7 w-full h-14 flex justify-start items-center text-white text-2xl space-x-l font-bold'
   return (
     <React.Fragment>
       <section>
@@ -10,7 +12,10 @@ function sideBar() {
           {SidebarData.map((item, index) => {
             return (
               <div key={index}>
-                <NavLink to={item.path} className="hover:bg-red-500 pl-2 mt-7 w-full h-14 flex justify-start items-center text-white text-2xl space-x-1 font-bold">
+                <NavLink to={item.path} 
+                className={({isActive}) =>
+                isActive ? activeLink:normalLink}
+                >
                   <span>{item.icon}</span>
                   <span>{item.title}</span>
                   </NavLink>
