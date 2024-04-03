@@ -11,6 +11,7 @@ function sideBar() {
         <div className="text-white">
           {SidebarData.map((item, index) => {
             return (
+            
               <div key={index}>
                 <NavLink to={item.path} 
                 className={({isActive}) =>

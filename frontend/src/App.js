@@ -7,6 +7,7 @@ import DisplayPromotion from './Components/Promotions/DisplayPromotion';
 import Discount from './Components/Discount/Discount';
 import Report from './Components/Report/Report';
 import Reorder from './Components/Reorder/Reorder';
+import AddProduct from './Components/MProduct/AddProduct';
 
 
 
@@ -17,12 +18,12 @@ function App() {
      <Routes>
         <Route path="/" element={<ProductDashboard/>}/>
         <Route path="/pdashboard" element={<ProductDashboard/>}/>
-        <Route path="/dispalyproduct" element={<Displayproduct/>}/>
+        <Route path="/displayproduct" element={<Displayproduct/>}/>
         <Route path="/displaypromotion" element={<DisplayPromotion/>}/>
         <Route path="/discount" element={<Discount/>}/>
         <Route path="/report" element={<Report/>}/>
         <Route path="/reorder" element={<Reorder/>}/>
-        
+        <Route path="/addproduct" element={<AddProduct/>}/>
 
 
 

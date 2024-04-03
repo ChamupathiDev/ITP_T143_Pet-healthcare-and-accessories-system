@@ -11,9 +11,9 @@ function ProductDashboard() {
         </div>
       </section>
 
-      <section>
-      <div className='grid grid-cols-12' >
-        <div className='col-span-2 bg-customBlue h-screen pl-2 md: col-span-2'>
+      <section className="pl-64 pt-20 overflow-x-auto">
+      <div className='grid grid-cols-10' >
+        <div className='col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0'>
           <Sidebar/>
         </div>
         <div className='font-bold text-2xl pl-2 col-span-9 bg-white-500 h-screen pl-2 md: col-span-10 '>Dashboard</div>

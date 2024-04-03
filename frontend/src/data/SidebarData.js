@@ -11,7 +11,7 @@ export const SidebarData=[
 
     {
         title: "Products",
-        path:"/dispalyproduct",
+        path:"/displayproduct",
         icon: <FaShoppingBag/>,
     },
 
