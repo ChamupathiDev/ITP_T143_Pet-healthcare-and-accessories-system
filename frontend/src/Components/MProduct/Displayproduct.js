@@ -56,7 +56,7 @@ function Displayproduct() {
                       Reorder Point
                     </th>
                     <th className="px-4 py-2 border-black border-2">
-                      Image URL
+                      Image 
                     </th>
                     <th className="px-4 py-2 border-black border-2">
                       Category

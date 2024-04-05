@@ -8,7 +8,7 @@ function Product(props) {
     price,
     stockAlertThreshold,
     reorderPoint,
-    imageUrl,
+    image,
     category,
   } = props.product;
   const truncateText = (text, maxLength) => {
@@ -39,9 +39,9 @@ function Product(props) {
       </td>
       <td
         className="px-4 py-2 border-black border-2 overflow-hidden max-w-xs"
-        title={imageUrl}
+        title={image}
       >
-        {truncateText(imageUrl, 20)}
+     {image}
       </td>
       <td className="px-4 py-2 border-black border-2">{category}</td>
       <td className="px-4 py-2 border-black border-2">

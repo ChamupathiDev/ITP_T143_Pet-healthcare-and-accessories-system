@@ -21,12 +21,12 @@ const getAllproducts = async(req, res, next) =>{
 //data insert
 const addproducts = async (req, res, next) =>{
 
-    const {name, description, price, stockAlertThreshold, reorderPoint, imageUrl, category} = req.body;
+    const {name, description, price, stockAlertThreshold, reorderPoint, image, category} = req.body;
 
     let products;
 
     try{
-        products = new product({name, description, price, stockAlertThreshold, reorderPoint, imageUrl, category});
+        products = new product({name, description, price, stockAlertThreshold, reorderPoint, image, category});
         await products.save();
     } catch (err){
         console.log(err);
@@ -62,12 +62,12 @@ const getById = async (req, res, next) => {
 const updateProduct = async (req, res, next) =>{
 
     const id = req.params.id;
-    const {name, description, price, stockAlertThreshold, reorderPoint, imageUrl, category} = req.body;
+    const {name, description, price, stockAlertThreshold, reorderPoint, image, category} = req.body;
 
     let products;
 
     try{
-        products = await product.findByIdAndUpdate(id, {name: name, description: description, price: price, stockAlertThreshold: stockAlertThreshold, reorderPoint: reorderPoint, imageUrl: imageUrl,
+        products = await product.findByIdAndUpdate(id, {name: name, description: description, price: price, stockAlertThreshold: stockAlertThreshold, reorderPoint: reorderPoint, image: image,
         category: category});
         products = await products.save();
     } catch(err){
