@@ -20,6 +20,7 @@ function AddProduct() {
       // Update state with the selected file
       setInputs((prevState) => ({
         ...prevState,
+      
         image: e.target.files[0], // Access the selected file
       }));
     } else {
@@ -38,10 +39,20 @@ function AddProduct() {
     const formData = new FormData();
     formData.append("image", inputs.image);
 
-    await axios
-      .post("http://localhost:8070/upload", formData)
-      .then((res) => res.data.image);
-    sendRequest().then(() => history("/displayproduct"));
+    try {
+      // Wait for the image upload request to complete
+      const response = await axios.post("http://localhost:8070/upload", formData);
+      const imageUrl = response.data.image;
+  
+      // Once the image is uploaded, send the product data to the database
+      await sendRequest(imageUrl);
+  
+      // Redirect to the display product page
+      history("/displayproduct");
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      // Handle error
+    }
   };
 
   const sendRequest = async () => {
@@ -52,7 +63,7 @@ function AddProduct() {
         price: String(inputs.price),
         stockAlertThreshold: String(inputs.stockAlertThreshold),
         reorderPoint: String(inputs.reorderPoint),
-        image: inputs.image.name,
+        image: String(inputs.image.name),
         category: String(inputs.category),
       })
       .then((res) => res.data);
@@ -157,7 +168,7 @@ function AddProduct() {
             />
             </div>
 
-            <button className="bg-blue-500 text-white text-lg py-4 px-8 rounded-xl">Submit</button>
+            <button className="bg-blue-500 text-white text-lg py-4 px-8 rounded-xl">submit</button>
           </form>
         </div>
       </section>

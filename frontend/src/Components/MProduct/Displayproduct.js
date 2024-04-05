@@ -55,7 +55,7 @@ function Displayproduct() {
                     <th className="px-2 py-2 border-black border-2">
                       Reorder Point
                     </th>
-                    <th className="px-4 py-2 border-black border-2">
+                    <th className="px-8 py-4 border-black border-2">
                       Image 
                     </th>
                     <th className="px-4 py-2 border-black border-2">

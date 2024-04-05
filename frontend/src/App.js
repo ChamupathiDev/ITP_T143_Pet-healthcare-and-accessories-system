@@ -8,6 +8,8 @@ import Discount from './Components/Discount/Discount';
 import Report from './Components/Report/Report';
 import Reorder from './Components/Reorder/Reorder';
 import AddProduct from './Components/MProduct/AddProduct';
+import UpdateProduct from './Components/MProduct/UpdateProduct';
+
 
 
 
@@ -24,6 +26,7 @@ function App() {
         <Route path="/report" element={<Report/>}/>
         <Route path="/reorder" element={<Reorder/>}/>
         <Route path="/addproduct" element={<AddProduct/>}/>
+        <Route path="/displayproduct/:id" element={<UpdateProduct/>}/>
 
 
 
