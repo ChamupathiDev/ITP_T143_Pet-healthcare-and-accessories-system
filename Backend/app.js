@@ -7,6 +7,7 @@ const dotenv = require ("dotenv");
 const path = require('path');
 
 const router = require("./Routes/PetProductRoutes");
+const promorouter = require("./Routes/PromotionRoutes");
 const app = express();
 require("dotenv").config();
 
@@ -41,6 +42,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
   });
 
 app.use("/products",router);
+app.use("/promotions",promorouter);
 
 const URL = process.env.MONGODB_URL;
 
