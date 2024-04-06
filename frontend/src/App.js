@@ -4,12 +4,17 @@ import ProductDashboard from './Components/Products/ProductDashboard';
 import React from 'react'
 import Displayproduct from './Components/MProduct/Displayproduct';
 import DisplayPromotion from './Components/Promotions/DisplayPromotion';
-import Discount from './Components/Discount/Discount';
+import DisplayDiscount from './Components/Discount/DisplayDiscount';
 import Report from './Components/Report/Report';
-import Reorder from './Components/Reorder/Reorder';
+import DisplayReorder from './Components/Reorder/DisplayReorder';
 import AddProduct from './Components/MProduct/AddProduct';
 import UpdateProduct from './Components/MProduct/UpdateProduct';
-
+import AddPromotion from './Components/Promotions/AddPromotion';
+import UpdatePromotion from './Components/Promotions/UpdatePromotion';
+import AddDiscount from './Components/Discount/AddDiscount';
+import UpdateDiscount from './Components/Discount/UpdateDiscount';
+import AddReorder from './Components/Reorder/AddReorder';
+import UpdateReorder from './Components/Reorder/UpdateReorder';
 
 
 
@@ -22,11 +27,17 @@ function App() {
         <Route path="/pdashboard" element={<ProductDashboard/>}/>
         <Route path="/displayproduct" element={<Displayproduct/>}/>
         <Route path="/displaypromotion" element={<DisplayPromotion/>}/>
-        <Route path="/discount" element={<Discount/>}/>
+        <Route path="/displaydiscount" element={<DisplayDiscount/>}/>
         <Route path="/report" element={<Report/>}/>
-        <Route path="/reorder" element={<Reorder/>}/>
+        <Route path="/displayreorder" element={<DisplayReorder/>}/>
         <Route path="/addproduct" element={<AddProduct/>}/>
         <Route path="/displayproduct/:id" element={<UpdateProduct/>}/>
+        <Route path="/addpromotion" element={<AddPromotion/>}/>
+        <Route path="/displaypromotion/:id" element={<UpdatePromotion/>}/>
+        <Route path="/adddiscount" element={<AddDiscount/>}/>
+        <Route path="/displaydiscount/:id" element={<UpdateDiscount/>}/>
+        <Route path="/addreorder" element={<AddReorder/>}/>
+        <Route path="/displayreorder/:id" element={<UpdateReorder/>}/>
 
 
 

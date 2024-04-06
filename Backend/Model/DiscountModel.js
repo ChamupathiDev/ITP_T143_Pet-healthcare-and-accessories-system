@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const promotionSchema = new Schema({
+const discountSchema = new Schema({
 
     name:{
         type: String,
@@ -14,16 +14,16 @@ const promotionSchema = new Schema({
         required: true
     },
 
-    startDate: {
-        type: String,
+    amount: {
+        type: Number,
         required: true
     },
 
-    endDate: {
+    applicableProduct: {
         type: String,
         required: true
     }
 
 });
 
-module.exports = mongoose.model("petpromotion",promotionSchema);
+module.exports = mongoose.model("petdiscount",discountSchema);

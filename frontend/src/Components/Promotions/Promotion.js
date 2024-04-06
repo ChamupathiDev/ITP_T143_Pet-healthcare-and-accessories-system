@@ -3,25 +3,25 @@ import {Link} from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Discount(props) {
+function Promotion(props) {
   const {
     _id,
     name,
     type,
-    amount,
-    applicableProduct,
+    startDate,
+    endDate,
    
-  } = props.discount;
+  } = props.promotion;
   
   
 
   const history = useNavigate();
 
   const deleteHandler = async()=>{
-    await axios.delete(`http://localhost:8070/discounts/${_id}`)
+    await axios.delete(`http://localhost:8070/promotions/${_id}`)
     .then(res=> res.data)
     .then(() =>history("/"))
-    .then(() =>history("/displaydiscount"));
+    .then(() =>history("/displaypromotion"));
   }
   
   return (
@@ -35,11 +35,11 @@ function Discount(props) {
      
       <td className="px-4 py-2 border-black border-2 text-center">{type}</td>
       
-      <td className="px-4 py-2 border-black border-2 text-center">{amount}</td>
-      <td className="px-4 py-2 border-black border-2 ">{applicableProduct}</td>
+      <td className="px-4 py-2 border-black border-2 text-center">{startDate}</td>
+      <td className="px-4 py-2 border-black border-2 ">{endDate}</td>
      
       <td className="px-2 py-2 border-black border-2">
-        <Link to={`/displaydiscount/${_id}`}>
+        <Link to={`/displaypromotion/${_id}`}>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 rounded mr-2">
           Update
         </button>
@@ -54,4 +54,4 @@ function Discount(props) {
   );
 }
 
-export default Discount;
+export default Promotion;

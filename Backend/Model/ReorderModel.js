@@ -2,28 +2,28 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const promotionSchema = new Schema({
+const reorderSchema = new Schema({
 
     name:{
         type: String,
         required: true
     },
 
-    type:{
+    reorderQuantity:{
         type: String,
         required: true
     },
 
-    startDate: {
+    supplierName: {
         type: String,
         required: true
     },
 
-    endDate: {
-        type: String,
+    supplierNo: {
+        type: Number,
         required: true
     }
 
 });
 
-module.exports = mongoose.model("petpromotion",promotionSchema);
+module.exports = mongoose.model("reorder",reorderSchema);

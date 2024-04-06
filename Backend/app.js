@@ -8,16 +8,22 @@ const path = require('path');
 
 const router = require("./Routes/PetProductRoutes");
 const promorouter = require("./Routes/PromotionRoutes");
+const disrouter = require("./Routes/DiscountRoutes");
+const rerouter = require("./Routes/ReorderRoutes");
 const app = express();
 require("dotenv").config();
 
 
 const PORT = process.env.PORT || 8070;
 
-
+//Middleware
 app.use (cors());
 app.use (bodyParser.json());
 app.use('/uploads', express.static('uploads'));
+app.use("/products",router);
+app.use("/promotions",promorouter);
+app.use("/discounts",disrouter);
+app.use("/reorders",rerouter);
 
 
 // Multer configuration for file upload
@@ -41,8 +47,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     return res.status(200).json({ imageName: req.file.originalname, imageUrl: req.file.path });
   });
 
-app.use("/products",router);
-app.use("/promotions",promorouter);
+
 
 const URL = process.env.MONGODB_URL;
 

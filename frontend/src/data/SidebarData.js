@@ -23,7 +23,7 @@ export const SidebarData=[
 
     {
         title: "Discounts",
-        path:"/discount",
+        path:"/displaydiscount",
         icon: <FaPercentage/>,
     },
 
@@ -35,10 +35,11 @@ export const SidebarData=[
 
     {
         title: "Reorder",
-        path:"/reorder",
+        path:"/displayreorder",
         icon: <FaSortAmountUp/>,
     },
 
     
 
 ]
+

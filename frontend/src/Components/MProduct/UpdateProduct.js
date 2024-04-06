@@ -39,11 +39,14 @@ function UpdateProduct() {
     const handleChange = (e) => {
         if (e.target.name === "image") {
           // Update state with the selected file
+          const file = e.target.files[0];
+          if (file && file.size > 0) {
           setInputs((prevState) => ({
             ...prevState,
           
             image: e.target.files[0], // Access the selected file
           }));
+        }
         } else {
           // For other input fields, update state with the input value
           setInputs((prevState) => ({
@@ -80,14 +83,18 @@ function UpdateProduct() {
 
       const sendRequest = async ()=>{
         await axios
-        .put(`http://Localhost:8070/products/${id} `,{
-            name: String(inputs.name),
-            description: String(inputs.description),
-            price: String(inputs.price),
-            stockAlertThreshold: String(inputs.stockAlertThreshold),
-            reorderPoint: String(inputs.reorderPoint),
-            image: inputs.image.name,
-            category: String(inputs.category),
+        .put(`http://localhost:8070/products/${id} `,{
+          name: String(inputs.name),
+          image: String(inputs.image.name),
+          description: String(inputs.description),
+          price: inputs.price,
+          quantity: inputs.quantity,
+          manufactureDate: String(inputs.manufactureDate),
+          expireDate: String(inputs.expireDate),
+          stockAlertThreshold: inputs.stockAlertThreshold,
+          reorderPoint: inputs.reorderPoint,
+          category: String(inputs.category),
+          brand: String(inputs.brand),
         })
         .then((res) => res.data);
     }
@@ -103,11 +110,11 @@ function UpdateProduct() {
     </section>
 
     <section className="pl-64 pt-20 overflow-x-auto">
-      <div className="grid grid-cols-10">
-        <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0  ">
-          <Sidebar />
-        </div>
-        <form className="col-span-8 p-8 bg-zinc-400 mt-4 rounded-xl" onSubmit={handleSubmit}>
+        <div className="grid grid-cols-10">
+          <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
+            <Sidebar />
+          </div>
+          <form className="col-span-8 p-8 bg-zinc-400 mt-4 rounded-xl" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label>Name:</label>
             <input
@@ -119,6 +126,20 @@ function UpdateProduct() {
               required
             ></input>
              </div>
+             <div className="mb-4">
+            <label>Image</label>
+            <br />
+            <input
+              type="file"
+              name="image"
+              onChange={handleChange}
+              
+              
+            ></input>
+            {inputs.image && inputs.image.name && (
+              <p className="mt-3">Selected file: {inputs.image.name}</p>
+            )}
+            </div>
              <div className="mb-4">
             <label>Description:</label>
             <br />
@@ -136,7 +157,7 @@ function UpdateProduct() {
             <label>Price:</label>
             <br />
             <input
-              type="text"
+              type="number"
               name="price"
               onChange={handleChange}
               value={inputs.price}
@@ -145,10 +166,47 @@ function UpdateProduct() {
             ></input>
             </div>
             <div className="mb-4">
-            <label>Stock Alert Threshold</label>
+            <label>Quantity</label>
+            <br />
+            <input
+              type="number"
+              name="quantity"
+              onChange={handleChange}
+              value={inputs.quantity}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            />
+            </div>
+            <div className="mb-4">
+            <label>Manufacture Date</label>
             <br />
             <input
               type="text"
+              name="manufactureDate"
+              onChange={handleChange}
+              value={inputs.manufactureDate}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            />
+            </div>
+            <div className="mb-4">
+            <label>Expire Date</label>
+            <br />
+            <input
+              type="text"
+              name="expireDate"
+              onChange={handleChange}
+              value={inputs.expireDate}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            />
+            </div>
+
+            <div className="mb-4">
+            <label>Stock Alert Threshold</label>
+            <br />
+            <input
+              type="number"
               name="stockAlertThreshold"
               onChange={handleChange}
               value={inputs.stockAlertThreshold}
@@ -159,27 +217,13 @@ function UpdateProduct() {
             <div className="mb-4">
             <label>Reorder Point</label>
             <input
-              type="text"
+              type="number"
               name="reorderPoint"
               onChange={handleChange}
               value={inputs.reorderPoint}
               className="border border-black p-2 w-full rounded-xl"
               required
             ></input>
-            </div>
-            <div className="mb-4">
-            <label>Image</label>
-            <br />
-            <input
-              type="file"
-              name="image"
-              onChange={handleChange}
-              
-              required
-            ></input>
-            {inputs.image && inputs.image.name && (
-              <p className="mt-3">Selected file: {inputs.image.name}</p>
-            )}
             </div>
             <div className="mb-4">
             <label>Category</label>
@@ -193,11 +237,22 @@ function UpdateProduct() {
               required
             />
             </div>
-
+            <div className="mb-4">
+            <label>Brand</label>
+            <br />
+            <input
+              type="text"
+              name="brand"
+              onChange={handleChange}
+              value={inputs.brand}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            />
+            </div>
             <button className="bg-blue-500 text-white text-lg py-4 px-8 rounded-xl">submit</button>
           </form>
         </div>
-        </section>
+      </section>
         </React.Fragment>
   )
 }
