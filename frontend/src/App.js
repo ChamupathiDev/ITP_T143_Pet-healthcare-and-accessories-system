@@ -15,6 +15,7 @@ import AddDiscount from './Components/Discount/AddDiscount';
 import UpdateDiscount from './Components/Discount/UpdateDiscount';
 import AddReorder from './Components/Reorder/AddReorder';
 import UpdateReorder from './Components/Reorder/UpdateReorder';
+import UserProductCatalog from './Components/MProduct/UserProductCatalog';
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path="/displaydiscount/:id" element={<UpdateDiscount/>}/>
         <Route path="/addreorder" element={<AddReorder/>}/>
         <Route path="/displayreorder/:id" element={<UpdateReorder/>}/>
+        <Route path="/displaycatalog" element={<UserProductCatalog/>}/>
 
 
 

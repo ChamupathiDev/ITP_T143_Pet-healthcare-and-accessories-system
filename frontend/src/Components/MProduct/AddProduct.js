@@ -89,7 +89,7 @@ function AddProduct() {
           <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
             <Sidebar />
           </div>
-          <form className="col-span-8 p-8 bg-zinc-400 mt-4 rounded-xl" onSubmit={handleSubmit}>
+          <form className="col-span-8 p-8 bg-zinc-200 mt-4 rounded-md shadow-md" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label>Name:</label>
             <input
