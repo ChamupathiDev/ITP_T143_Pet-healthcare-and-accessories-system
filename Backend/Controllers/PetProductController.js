@@ -108,9 +108,11 @@ const deleteProduct = async (req, res, next) =>{
 
 
 
+
 exports.getAllproducts = getAllproducts;
 exports.addproducts = addproducts;
 exports.getById = getById;
 exports.updateProduct = updateProduct;
 exports.deleteProduct = deleteProduct;
+
 
