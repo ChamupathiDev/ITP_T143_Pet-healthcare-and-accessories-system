@@ -5,3 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+    .truncate {
+      /* Override any text truncation styles */
+      white-space: normal !important; /* Prevent text from being truncated */
+      overflow: visible !important; /* Ensure that all text is visible */
+    }
+  }
+

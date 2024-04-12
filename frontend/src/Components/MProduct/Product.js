@@ -57,6 +57,7 @@ function Product(props) {
       <td
         className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md overflow-hidden max-w-xs "
         title={description}
+        
       >
         {truncateText(description, 30)}
       </td>
