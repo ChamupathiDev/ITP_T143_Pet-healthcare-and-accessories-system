@@ -28,6 +28,20 @@ function Displayproduct() {
     onAfterPrint: () => alert("Products Report Successfully Downloaded!"),
   });
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [noResults, setNoResults] = useState(false);
+
+  const handleSearch = () =>{
+    fetchHandler().then((data) =>{
+      const filteredProducts = data.products.filter((product) =>
+    Object.values(product).some((field)=>
+    field.toString().toLowerCase().includes(searchQuery.toLowerCase())
+    ))
+    setProducts(filteredProducts);
+    setNoResults(filteredProducts.length === 0);
+    });
+  }
+
  
   return (
     <React.Fragment>
@@ -50,6 +64,23 @@ function Displayproduct() {
             <button onClick={handlePrint} className="  text-right bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 mt-2 ml-4 rounded inline-block">Download Product Report</button>
             <br />
             <br />
+            
+            <div className="mb-2">
+            <input onChange={(e)=> setSearchQuery(e.target.value)}
+            type="text"
+            name="search"
+            placeholder="search here"
+            className="border border-black px-2 py-1">
+            </input>
+
+            <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-1 inline-block ml-2">Search</button>
+            </div>
+            
+            {noResults ? (
+              <div>
+                <p>No Products Found</p>
+              </div>
+            ): (
             <div ref={tableRef} >
             <table className="table-auto w-full border-collapse">
               <thead>
@@ -77,7 +108,7 @@ function Displayproduct() {
               </tbody>
             </table>
             </div>
-
+            )}
             
           </div>
         </div>

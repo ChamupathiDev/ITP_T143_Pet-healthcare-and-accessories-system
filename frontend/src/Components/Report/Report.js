@@ -74,7 +74,7 @@ function Report() {
           <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
             <Sidebar />
           </div>
-          <div className="mt-8 mx-auto max-w-md">
+          <div className="mt-8 mx-auto max-w-md col-span-10">
             <form onSubmit={submitPdf} className="bg-white p-6 rounded shadow-md">
               <label className="block mb-2">Report Title</label>
               <input
@@ -100,7 +100,7 @@ function Report() {
               </button>
             </form>
           </div>
-          <div className="mt-8 mx-auto max-w-md text-center">
+          <div className="mt-8 mx-auto max-w-md text-center col-span-10">
             <h4 className="mb-4">Uploaded PDF:</h4>
             <div className="flex flex-wrap">
             {allPdf &&
@@ -119,9 +119,9 @@ function Report() {
               ))}
               </div>
           </div>
-         
+         <div className="col-span-8">
           <PdfCompk pdfFile={pdfFile} />
-         
+          </div>
         </div>
       </section>
       

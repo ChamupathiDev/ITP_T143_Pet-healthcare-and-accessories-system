@@ -98,24 +98,24 @@ function ProductDashboard() {
           <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
             <Sidebar />
           </div>
-          <div className="mt-4 flex justify-center items-center ml-64">
-
-              <div className="card p-4 bg-customBlue rounded-md shadow-lg ml-52 w-96 h-40">
+          <div className="mt-4  container flex justify-center items-center ml-96 space-x-4">
+          
+              <div className="card p-4 bg-customBlue rounded-md shadow-lg ml-52 flex-grow">
               <FontAwesomeIcon icon={faBox} className="text-white text-3xl mr-2" />
                 <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
                   Total Products Quantity
                 </h3>
                 <p className="text-xl font-bold text-white text-center">{totalQuantity}</p>
               </div>
-              <div className="card p-4 bg-customBlue rounded-md shadow-lg ml-20 w-96 h-40">
-              <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-600 text-2xl mr-2" />
+              <div className="card p-4 bg-customBlue rounded-md shadow-lg flex-grow ">
+              <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-600 text-3xl mr-2" />
               <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
                 Low Stock Products
               </h3>
               <p className="text-xl font-bold text-white text-center">{lowStockCount}</p>
             </div>
-            <div className="card p-4 bg-customBlue rounded-md shadow-lg ml-20 w-96 h-40">
-              <FontAwesomeIcon icon={faBox} className="text-yellow-500 text-3xl" />
+            <div className="card p-4 bg-customBlue rounded-md shadow-lg flex-grow">
+              <FontAwesomeIcon icon={faBox} className="text-red-500 text-3xl" />
               <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
                 Reorder Products
               </h3>
@@ -139,8 +139,8 @@ function ProductDashboard() {
                 )}
               </div>
             </div>
-            
-          </div>
+            </div>
+          
         
       </section>
     </React.Fragment>

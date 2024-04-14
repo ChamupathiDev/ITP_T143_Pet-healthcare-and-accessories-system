@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 function Product(props) {
   const {
@@ -77,13 +78,13 @@ function Product(props) {
       <td className=" px-1 py-1 border border-solid border-gray-400 rounded-md shadow-md print:hidden">
         <Link to={`/displayproduct/${_id}`}>
         <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 rounded mr-2 ">
-          Update
+         < FaEdit/>
         </button>
         </Link>
       </td>
       <td className=" px-1 py-1 border border-solid border-gray-400 rounded-md shadow-md print:hidden">
         <button onClick={deleteHandler} className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 py-2 rounded">
-          Delete
+        <FaTrash/>
         </button>
       </td>
     </tr>

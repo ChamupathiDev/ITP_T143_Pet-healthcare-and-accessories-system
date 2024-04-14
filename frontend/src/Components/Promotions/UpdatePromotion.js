@@ -66,9 +66,12 @@ function UpdatePromotion() {
           <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
             <Sidebar />
           </div>
-          <form className="col-span-8 p-8 bg-zinc-400 mt-4 rounded-xl" onSubmit={handleSubmit}>
+          <div className="col-span-8 p-8 rounded-md shadow-md text-3xl text-center font-bold underline">
+            <h1>Update Promotion Form</h1>
+          </div>
+          <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label>Name:</label>
+            <label className="font-bold">Name:</label>
             <input
               type="text"
               name="name"
@@ -80,7 +83,7 @@ function UpdatePromotion() {
              </div>
 
              <div className="mb-4">
-            <label>Promotion Type:</label>
+            <label className="font-bold">Promotion Type:</label>
             <br />
             <input
               type="text"
@@ -93,7 +96,7 @@ function UpdatePromotion() {
             </div>
             
             <div className="mb-4">
-            <label>Start Date</label>
+            <label className="font-bold">Start Date</label>
             <br />
             <input
               type="text"
@@ -105,7 +108,7 @@ function UpdatePromotion() {
             />
             </div>
             <div className="mb-4">
-            <label>End Date</label>
+            <label className="font-bold">End Date</label>
             <br />
             <input
               type="text"

@@ -51,9 +51,12 @@ function AddDiscount() {
           <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
             <Sidebar />
           </div>
-          <form className="col-span-8 p-8 bg-zinc-400 mt-4 rounded-xl" onSubmit={handleSubmit}>
+          <div className="col-span-8 p-8 rounded-md shadow-md text-3xl text-center font-bold underline">
+            <h1>Add Discount Form</h1>
+          </div>
+          <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label>Name:</label>
+            <label className="font-bold">Name:</label>
             <input
               type="text"
               name="name"
@@ -65,7 +68,7 @@ function AddDiscount() {
              </div>
 
              <div className="mb-4">
-            <label>Discount Type:</label>
+            <label className="font-bold">Discount Type:</label>
             <br />
             <input
               type="text"
@@ -78,7 +81,7 @@ function AddDiscount() {
             </div>
             
             <div className="mb-4">
-            <label>Amount</label>
+            <label className="font-bold">Amount</label>
             <br />
             <input
               type="number"
@@ -90,7 +93,7 @@ function AddDiscount() {
             />
             </div>
             <div className="mb-4">
-            <label>Applicable Product</label>
+            <label className="font-bold">Applicable Product</label>
             <br />
             <input
               type="text"

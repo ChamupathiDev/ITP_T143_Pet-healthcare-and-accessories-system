@@ -5,13 +5,13 @@ function Catalog(props) {
   const imageBaseUrl = "http://localhost:8070/uploads";
 
   return (
-    <div className="max-w-xs rounded overflow-hidden shadow-lg">
+    <div className="rounded overflow-hidden shadow-lg px-1 py-1">
       <img
         className="w-full"
         src={`${imageBaseUrl}/${image}`}
         alt={name}
       />
-      <div className="px-6 py-4">
+      <div className="px-4 py-2">
         <div className="font-bold text-xl mb-2">{name}</div>
         <p className="text-gray-700 text-base">
           Price: {price}
