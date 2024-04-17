@@ -23,33 +23,45 @@ const productSchema = new Schema({
 
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: [0, "Price cannot be negative"]
     },
 
     quantity:{
         type: Number,
-        required: true
+        required: true,
+        min: [0, "Quantity cannot be negative"]
     },
 
 
     manufactureDate:{
         type: String,
-        required: true
+        required: true,
+        match: [/^\d{4}-\d{2}-\d{2}$/, "Manufacture date must be in the format YYYY-MM-DD"]
     },
 
     expireDate:{
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: function(expireDate) {
+                // Custom validation logic to check if expireDate and manufactureDate are not the same
+                return this.manufactureDate !== expireDate;
+            },
+            message: "Expire date cannot be the same as manufacture date"
+        }
     },
 
     stockAlertThreshold:{
         type: Number,
-        required: true
+        required: true,
+        min: [0, "Stock alert threshold cannot be negative"]
     },
 
     reorderPoint:{
         type: Number,
-        required: true
+        required: true,
+        min: [0, "Reorder point cannot be negative"]
     },
 
     
