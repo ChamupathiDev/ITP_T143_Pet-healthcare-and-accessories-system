@@ -24,6 +24,7 @@ import ViewEmployees from "./Component/EmployeeDetails/ViewEmployees";
 import Loginupdate from "./Component/Login/Loginupdate";
 import UpdateUseradmin from "./Component/Update User/UpdateUseradmin";
 import NavbarAdmin from "./Component/nav/nav admin";
+import Petprofile from "./Component/Dashboards/Petprofile"
 
 function App() {
   return (
@@ -51,10 +52,15 @@ function App() {
           <Route path="/NavbarAdmin" element={<NavbarAdmin />} />
           <Route path="/UserDashboard/:email" element={<UserDashboard />} />
           <Route path="/AdminDashboard/:email" element={<AdminDashboard />} />
+          <Route path="/Petprofile/:email" element={<Petprofile />} />
           {/* Route for UserDashboard with props */}
           <Route
             path="/UserDashboard"
             element={<UserDashboard email={window.history.state?.email} />}
+          />
+          <Route
+            path="/Petprofile"
+            element={<Petprofile email={window.history.state?.email} />}
           />
           <Route
             path="/AdminDashboard"

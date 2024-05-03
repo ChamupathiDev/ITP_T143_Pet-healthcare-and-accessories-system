@@ -679,7 +679,7 @@ function UserDashboard() {
           {/*....................................pet details..............................................*/}
           <div
             className="flex justify-center mt-10"
-            style={{ position: "absolute", top: "410px", left: "250px" }}
+            style={{ position: "absolute", top: "410px", left: "300px" }}
           >
             <div>
               {pets.length > 0 ? (
@@ -695,7 +695,6 @@ function UserDashboard() {
                       <th className="border p-2">Weight</th>
                       <th className="border p-2">Microchip Id</th>
                       <th className="border p-2">Color</th>
-                      <th className="border p-2">Owner</th>
                       <th className="border p-2">Actions</th>
                     </tr>
                   </thead>
@@ -717,7 +716,6 @@ function UserDashboard() {
                         <td className="border p-2">{pet.weight}</td>
                         <td className="border p-2">{pet.microchipId}</td>
                         <td className="border p-2">{pet.color}</td>
-                        <td className="border p-2">{pet.owner}</td>
                         <td className="border p-2">
                           <Link to={`/UpdatePet/${pet._id}`}>
                             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
@@ -729,7 +727,12 @@ function UserDashboard() {
                             onClick={() => deletepet(pet._id)}
                           >
                             Delete
-                          </button>
+                          </button>&nbsp;&nbsp;
+                          <Link to={`/Petprofile/${pet.owner}`}>
+                            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
+                              View Pet
+                            </button>
+                          </Link>
                         </td>
                       </tr>
                     ))}
@@ -742,7 +745,7 @@ function UserDashboard() {
               )}
             </div>
 
-            <div style={{ position: "absolute", top: "120px", left: "1090px" }}>
+            <div style={{ position: "absolute", top: "0px", left: "950px" }}>
               <Link to={`/AddPets`}>
                 <button
                   className="bg-blue-500 text-white px-16 py-2 rounded-xl hover:bg-blue-700 mr-2"

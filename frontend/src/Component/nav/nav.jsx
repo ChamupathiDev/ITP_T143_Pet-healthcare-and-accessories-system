@@ -92,6 +92,14 @@ const NavBar = () => {
           >
             View Employees
           </Nav.Link>
+          
+          <Nav.Link
+            href="/Petprofile"
+            className={location.pathname === "/Petprofile" ? "active" : ""}
+            style={{ color: "white" }} 
+          >
+            Pet profile
+          </Nav.Link>
 
           <NavDropdown title="Login or Sign Up" style={{ color: "white" }}> {/* Text color */}
             <NavDropdown.Item onClick={toggleLogin}>Login</NavDropdown.Item>
