@@ -68,7 +68,7 @@ function AddProduct() {
 
     try {
       // Wait for the image upload request to complete
-      const response = await axios.post("http://localhost:8070/upload", formData);
+      const response = await axios.post("http://localhost:5000/upload", formData);
       const imageUrl = response.data.image;
   
       // Once the image is uploaded, send the product data to the database
@@ -84,7 +84,7 @@ function AddProduct() {
 
   const sendRequest = async () => {
     await axios
-      .post("http://localhost:8070/products/add", {
+      .post("http://localhost:5000/products/add", {
         name: String(inputs.name),
         image: String(inputs.image.name),
         description: String(inputs.description),

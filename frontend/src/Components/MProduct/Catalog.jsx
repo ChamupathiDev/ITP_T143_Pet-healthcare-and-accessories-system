@@ -2,7 +2,7 @@ import React from "react";
 
 function Catalog(props) {
   const { name, image, price } = props.catalog;
-  const imageBaseUrl = "http://localhost:8070/uploads";
+  const imageBaseUrl = "http://localhost:5000/uploads";
 
   return (
     <div className="rounded overflow-hidden shadow-lg px-1 py-1">

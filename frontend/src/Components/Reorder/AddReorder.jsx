@@ -1,41 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function UpdateReorder() {
-  const [inputs, setInputs] = useState({});
+function AddReorder() {
   const history = useNavigate();
-  const id = useParams().id;
-
-  useEffect(() => {
-    const fetchHandler = async () => {
-      await axios
-        .get(`http://localhost:8070/reorders/${id}`)
-        .then((res) => res.data)
-        .then((data) => setInputs(data.reorders));
-    };
-    fetchHandler();
-  }, [id]);
-
+  const [inputs, setInputs] = useState({
+    name: "",
+    reorderQuantity: "",
+    supplierName: "",
+    supplierNo: "",
+  });
   const handleChange = (e) => {
-    setInputs((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+    
+      setInputs((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
 
-    sendRequest().then(() => history("/displayreorder"));
-  };
+    await sendRequest().then(()=>history("/displayreorder"))
+
+  }
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:8070/reorders/${id} `, {
+      .post("http://localhost:5000/reorders/add", {
         name: String(inputs.name),
         reorderQuantity: inputs.reorderQuantity,
         supplierName: String(inputs.supplierName),
@@ -43,7 +38,6 @@ function UpdateReorder() {
       })
       .then((res) => res.data);
   };
-
   return (
     <React.Fragment>
       <section>
@@ -58,7 +52,7 @@ function UpdateReorder() {
             <Sidebar />
           </div>
           <div className="col-span-8 p-8 rounded-md shadow-md text-3xl text-center font-bold underline">
-            <h1>Update Reorder Form</h1>
+            <h1>Add Reorder Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -119,4 +113,4 @@ function UpdateReorder() {
   );
 }
 
-export default UpdateReorder;
+export default AddReorder;

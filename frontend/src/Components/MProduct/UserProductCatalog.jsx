@@ -9,7 +9,7 @@ const UserProductCatalog = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8070/products/getAll");
+        const response = await axios.get("http://localhost:5000/products/getAll");
         setProducts(response.data.products);
         setLoading(false);
       } catch (error) {

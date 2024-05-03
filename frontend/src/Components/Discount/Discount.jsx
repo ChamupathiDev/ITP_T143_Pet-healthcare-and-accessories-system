@@ -4,25 +4,25 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-function Promotion(props) {
+function Discount(props) {
   const {
     _id,
     name,
     type,
-    startDate,
-    endDate,
+    amount,
+    applicableProduct,
    
-  } = props.promotion;
+  } = props.discount;
   
   
 
   const history = useNavigate();
 
   const deleteHandler = async()=>{
-    await axios.delete(`http://localhost:8070/promotions/${_id}`)
+    await axios.delete(`http://localhost:5000/discounts/${_id}`)
     .then(res=> res.data)
     .then(() =>history("/"))
-    .then(() =>history("/displaypromotion"));
+    .then(() =>history("/displaydiscount"));
   }
   
   return (
@@ -36,13 +36,13 @@ function Promotion(props) {
      
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md text-center">{type}</td>
       
-      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md text-center">{startDate}</td>
-      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md ">{endDate}</td>
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md text-center">{amount}</td>
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md ">{applicableProduct}</td>
      
       <td className="px-2 py-2 border border-solid border-gray-400 rounded-md shadow-md print:hidden">
-        <Link to={`/displaypromotion/${_id}`}>
+        <Link to={`/displaydiscount/${_id}`}>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 rounded mr-2">
-         <FaEdit/>
+          <FaEdit/>
         </button>
         </Link>
       </td>
@@ -55,4 +55,4 @@ function Promotion(props) {
   );
 }
 
-export default Promotion;
+export default Discount;

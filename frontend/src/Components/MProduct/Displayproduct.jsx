@@ -6,7 +6,7 @@ import Product from "./Product";
 import { Link } from "react-router-dom";
 import { useReactToPrint } from 'react-to-print';
 
-const URL = "http://localhost:8070/products/getAll";
+const URL = "http://localhost:5000/products/getAll";
 
 
 const fetchHandler = async () => {

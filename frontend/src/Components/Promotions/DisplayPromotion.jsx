@@ -2,26 +2,27 @@ import React, { useEffect, useState, useRef } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
-import Discount from "./Discount"; 
+import Promotion from "./Promotion";
 import {Link} from "react-router-dom"
 import { useReactToPrint } from 'react-to-print';
 
-const URL = "http://localhost:8070/discounts/getAll";
+
+const URL = "http://localhost:5000/promotions/getAll";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };
-function DisplayDiscount() {
-  const [discounts, setDiscounts] = useState();
+function DisplayPromotion() {
+  const [promotions, setPromotions] = useState();
   useEffect(() => {
-    fetchHandler().then((data) => setDiscounts(data.discounts));
+    fetchHandler().then((data) => setPromotions(data.promotions));
   }, []);
 
   const tableRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => tableRef.current,
-    documentTitle: "Discounts Report",
-    onAfterPrint: () => alert("Discounts Report Successfully Downloaded!"),
+    documentTitle: "Promotions Report",
+    onAfterPrint: () => alert("Promotions Report Successfully Downloaded!"),
   });
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,12 +30,12 @@ function DisplayDiscount() {
 
   const handleSearch = () =>{
     fetchHandler().then((data) =>{
-      const filteredDiscounts = data.discounts.filter((discount) =>
-    Object.values(discount).some((field)=>
+      const filteredPromotions = data.promotions.filter((promotion) =>
+    Object.values(promotion).some((field)=>
     field.toString().toLowerCase().includes(searchQuery.toLowerCase())
     ))
-    setDiscounts(filteredDiscounts);
-    setNoResults(filteredDiscounts.length === 0);
+    setPromotions(filteredPromotions);
+    setNoResults(filteredPromotions.length === 0);
     });
   }
 
@@ -55,13 +56,14 @@ function DisplayDiscount() {
 
           <div className="col-span-10 p-4">
           <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 rounded mr-2 mt-5 inline-block">
-          <Link to="/adddiscount">
-            <button>Add Discount</button>
+          <Link to="/addpromotion">
+            <button>Add Promotion</button>
             </Link>
             </div>
-            <button onClick={handlePrint} className=" text-right bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 mt-2 ml-4 rounded inline-block">Download Discount Report</button>
+            <button onClick={handlePrint} className=" text-right bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 mt-2 ml-4 rounded inline-block">Download Promotion Report</button>
             <br/>
             <br/>
+
             <div className="mb-2">
             <input onChange={(e)=> setSearchQuery(e.target.value)}
             type="text"
@@ -74,25 +76,25 @@ function DisplayDiscount() {
             </div>
             {noResults ? (
               <div>
-                <p>No Discounts Found</p>
+                <p>No Promotions Found</p>
               </div>
             ): (
             <div ref={tableRef}>
-              <table className="table-auto w-full border-collapse border">
+              <table className="table-auto w-full border-collapse">
                 <thead>
                   <tr className="bg-gray-200">
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">ID</th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">Name</th>
                    
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
-                      Discount Type
+                      Promotion Type
                     </th>
                     
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
-                      Amount
+                      Start Date
                     </th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
-                      Applicable Product
+                      End Date
                     </th>
                    
                     <th className="px-1 py-1 border border-solid border-gray-400 rounded-md shadow-md print:hidden">Edit</th>
@@ -100,9 +102,9 @@ function DisplayDiscount() {
                   </tr>
                 </thead>
                 <tbody>
-                  {discounts &&
-                    discounts.map((discount, i) => (
-                      <Discount key={i} discount={discount} />
+                  {promotions &&
+                    promotions.map((promotion, i) => (
+                      <Promotion key={i} promotion={promotion} />
                     ))}
                 </tbody>
               </table>
@@ -120,4 +122,4 @@ function DisplayDiscount() {
 
 
 
-export default DisplayDiscount;
+export default DisplayPromotion;

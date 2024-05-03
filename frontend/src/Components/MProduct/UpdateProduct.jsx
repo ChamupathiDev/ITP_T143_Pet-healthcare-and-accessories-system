@@ -14,7 +14,7 @@ function UpdateProduct() {
     useEffect (()=>{
         const fetchHandler = async () => {
             await axios
-                .get(`http://localhost:8070/products/${id}`)
+                .get(`http://localhost:5000/products/${id}`)
                 .then((res) => res.data)
                 .then((data) => {
                     // Set the product details including the image data
@@ -65,7 +65,7 @@ function UpdateProduct() {
     
         try {
           // Wait for the image upload request to complete
-          const response = await axios.post("http://localhost:8070/upload", formData);
+          const response = await axios.post("http://localhost:5000/upload", formData);
           const imageUrl = response.data.image;
       
           // Once the image is uploaded, send the product data to the database
@@ -83,7 +83,7 @@ function UpdateProduct() {
 
       const sendRequest = async ()=>{
         await axios
-        .put(`http://localhost:8070/products/${id} `,{
+        .put(`http://localhost:5000/products/${id} `,{
           name: String(inputs.name),
           image: String(inputs.image.name),
           description: String(inputs.description),

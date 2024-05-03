@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
-import Sidebar from "../Sidebar/Sidebar";
+import Nav from "../Nav/Nav.jsx";
+import Sidebar from "../Sidebar/Sidebar.jsx";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
-import PdfCompk from "./PdfCompk.js";
+import PdfCompk from "./PdfCompk.jsx";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -22,7 +22,7 @@ function Report() {
   }, []);
 
   const getPdf = async () => {
-    const result = await axios.get("http://localhost:8070/getpfiles");
+    const result = await axios.get("http://localhost:5000/getpfiles");
     console.log(result.data.data);
     setAllPdf(result.data.data);
   };
@@ -37,7 +37,7 @@ function Report() {
 
     try {
       const result = await axios.post(
-        "http://localhost:8070/uploadpfile",
+        "http://localhost:5000/uploadpfile",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -59,7 +59,7 @@ function Report() {
   const showPdf = (pdf) => {
     // window.open(`http://localhost:8070/files/${pdf}`, "_blank", "noreferrer");//
     
-    setPdfFile(`http://localhost:8070/files/${pdf}`)
+    setPdfFile(`http://localhost:5000/files/${pdf}`)
   };
   return (
     <React.Fragment>

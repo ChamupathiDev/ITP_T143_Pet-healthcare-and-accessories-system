@@ -24,12 +24,12 @@ function Product(props) {
       ? text.substring(0, maxLength) + "..."
       : text;
   };
-  const imageBaseUrl = "http://localhost:8070/uploads";
+  const imageBaseUrl = "http://localhost:5000/uploads";
 
   const history = useNavigate();
 
   const deleteHandler = async()=>{
-    await axios.delete(`http://localhost:8070/products/${_id}`)
+    await axios.delete(`http://localhost:5000/products/${_id}`)
     .then(res=> res.data)
     .then(() =>history("/"))
     .then(() =>history("/displayproduct"));

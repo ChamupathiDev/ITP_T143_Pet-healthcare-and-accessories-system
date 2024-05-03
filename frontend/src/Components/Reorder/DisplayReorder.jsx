@@ -2,27 +2,26 @@ import React, { useEffect, useState, useRef } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
-import Promotion from "./Promotion";
+import Reorder from "./Reorder";
 import {Link} from "react-router-dom"
 import { useReactToPrint } from 'react-to-print';
 
-
-const URL = "http://localhost:8070/promotions/getAll";
+const URL = "http://localhost:5000/reorders/getAll";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };
-function DisplayPromotion() {
-  const [promotions, setPromotions] = useState();
+function DisplayReorder() {
+  const [reorders, setReorders] = useState();
   useEffect(() => {
-    fetchHandler().then((data) => setPromotions(data.promotions));
+    fetchHandler().then((data) => setReorders(data.reorders));
   }, []);
 
   const tableRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => tableRef.current,
-    documentTitle: "Promotions Report",
-    onAfterPrint: () => alert("Promotions Report Successfully Downloaded!"),
+    documentTitle: "Reorders Report",
+    onAfterPrint: () => alert("Reorders Report Successfully Downloaded!"),
   });
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,12 +29,12 @@ function DisplayPromotion() {
 
   const handleSearch = () =>{
     fetchHandler().then((data) =>{
-      const filteredPromotions = data.promotions.filter((promotion) =>
-    Object.values(promotion).some((field)=>
+      const filteredReorders = data.reorders.filter((reorder) =>
+    Object.values(reorder).some((field)=>
     field.toString().toLowerCase().includes(searchQuery.toLowerCase())
     ))
-    setPromotions(filteredPromotions);
-    setNoResults(filteredPromotions.length === 0);
+    setReorders(filteredReorders);
+    setNoResults(filteredReorders.length === 0);
     });
   }
 
@@ -53,17 +52,16 @@ function DisplayPromotion() {
             <Sidebar />
           </div>
           
-
+       
           <div className="col-span-10 p-4">
           <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 rounded mr-2 mt-5 inline-block">
-          <Link to="/addpromotion">
-            <button>Add Promotion</button>
+          <Link to="/addreorder">
+            <button>Add Reorder</button>
             </Link>
             </div>
-            <button onClick={handlePrint} className=" text-right bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 mt-2 ml-4 rounded inline-block">Download Promotion Report</button>
+            <button onClick={handlePrint} className=" text-right bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-4 mt-2 ml-4 rounded inline-block">Download Reorder Report</button>
             <br/>
             <br/>
-
             <div className="mb-2">
             <input onChange={(e)=> setSearchQuery(e.target.value)}
             type="text"
@@ -76,25 +74,25 @@ function DisplayPromotion() {
             </div>
             {noResults ? (
               <div>
-                <p>No Promotions Found</p>
+                <p>No Reorders Found</p>
               </div>
             ): (
             <div ref={tableRef}>
-              <table className="table-auto w-full border-collapse">
+              <table className="table-auto w-full border-collapse border">
                 <thead>
                   <tr className="bg-gray-200">
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">ID</th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">Name</th>
                    
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
-                      Promotion Type
+                      Reorder Quantity
                     </th>
                     
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
-                      Start Date
+                      Supplier Name
                     </th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
-                      End Date
+                      Supplier No
                     </th>
                    
                     <th className="px-1 py-1 border border-solid border-gray-400 rounded-md shadow-md print:hidden">Edit</th>
@@ -102,15 +100,15 @@ function DisplayPromotion() {
                   </tr>
                 </thead>
                 <tbody>
-                  {promotions &&
-                    promotions.map((promotion, i) => (
-                      <Promotion key={i} promotion={promotion} />
+                  {reorders &&
+                    reorders.map((reorder, i) => (
+                      <Reorder key={i} reorder={reorder} />
                     ))}
                 </tbody>
               </table>
             </div>
-            )}
             
+                  )}
           </div>
           
         </div>
@@ -122,4 +120,4 @@ function DisplayPromotion() {
 
 
 
-export default DisplayPromotion;
+export default DisplayReorder;

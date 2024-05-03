@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function UpdateDiscount() {
-  const [inputs, setInputs] = useState({});
+function AddPromotion() {
   const history = useNavigate();
-  const id = useParams().id;
-
-  useEffect(() => {
-    const fetchHandler = async () => {
-      await axios
-        .get(`http://localhost:8070/discounts/${id}`)
-        .then((res) => res.data)
-        .then((data) => setInputs(data.discounts));
-    };
-    fetchHandler();
-  }, [id]);
-
+  const [inputs, setInputs] = useState({
+    name: "",
+    type: "",
+    startDate: "",
+    endDate: "",
+  });
   const handleChange = (e) => {
-    setInputs((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+    
+      setInputs((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
 
-    sendRequest().then(() => history("/displaydiscount"));
-  };
+    await sendRequest().then(()=>history("/displaypromotion"))
+
+  }
   const sendRequest = async () => {
     await axios
-      .put(`http://localhost:8070/discounts/${id} `, {
+      .post("http://localhost:5000/promotions/add", {
         name: String(inputs.name),
         type: String(inputs.type),
-        amount: inputs.amount,
-        applicableProduct: String(inputs.applicableProduct),
+        startDate: String(inputs.startDate),
+        endDate: String(inputs.endDate),
       })
       .then((res) => res.data);
   };
-
   return (
     <React.Fragment>
       <section>
@@ -58,7 +52,7 @@ function UpdateDiscount() {
             <Sidebar />
           </div>
           <div className="col-span-8 p-8 rounded-md shadow-md text-3xl text-center font-bold underline">
-            <h1>Update Discount Form</h1>
+            <h1>Add Promotion Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -74,7 +68,7 @@ function UpdateDiscount() {
              </div>
 
              <div className="mb-4">
-            <label className="font-bold">Discount Type:</label>
+            <label className="font-bold">Promotion Type:</label>
             <br />
             <input
               type="text"
@@ -87,25 +81,25 @@ function UpdateDiscount() {
             </div>
             
             <div className="mb-4">
-            <label className="font-bold">Amount</label>
+            <label className="font-bold">Start Date</label>
             <br />
             <input
-              type="number"
-              name="amount"
+              type="text"
+              name="startDate"
               onChange={handleChange}
-              value={inputs.amount}
+              value={inputs.startDate}
               className="border border-black p-2 w-full rounded-xl"
               required
             />
             </div>
             <div className="mb-4">
-            <label className="font-bold">Applicable Product</label>
+            <label className="font-bold">End Date</label>
             <br />
             <input
               type="text"
-              name="applicableProduct"
+              name="endDate"
               onChange={handleChange}
-              value={inputs.applicableProduct}
+              value={inputs.endDate}
               className="border border-black p-2 w-full rounded-xl"
               required
             />
@@ -119,4 +113,4 @@ function UpdateDiscount() {
   );
 }
 
-export default UpdateDiscount;
+export default AddPromotion;

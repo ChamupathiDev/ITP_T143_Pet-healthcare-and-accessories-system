@@ -19,7 +19,7 @@ function Reorder(props) {
   const history = useNavigate();
 
   const deleteHandler = async()=>{
-    await axios.delete(`http://localhost:8070/reorders/${_id}`)
+    await axios.delete(`http://localhost:5000/reorders/${_id}`)
     .then(res=> res.data)
     .then(() =>history("/"))
     .then(() =>history("/displayreorder"));

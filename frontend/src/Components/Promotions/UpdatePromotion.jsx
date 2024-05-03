@@ -1,58 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function AddPromotion() {
-  const history = useNavigate();
-  const [inputs, setInputs] = useState({
-    name: "",
-    type: "",
-    startDate: "",
-    endDate: "",
-  });
-  const handleChange = (e) => {
+function UpdatePromotion() {
+
+    const [inputs, setInputs] = useState({});
+    const history = useNavigate();
+    const id = useParams().id;
+
+    useEffect (()=>{
+        const fetchHandler = async () => {
+            await axios
+                .get(`http://localhost:5000/promotions/${id}`)
+                .then((res) => res.data)
+                .then((data) => setInputs(data.promotions));
+        };
+        fetchHandler();
+    }, [id]);
     
-      setInputs((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value,
-      }));
-    }
+
+    const handleChange = (e) => {
+    
+        setInputs((prevState) => ({
+          ...prevState,
+          [e.target.name]: e.target.value,
+        }));
+      };
+    
   
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(inputs);
+  
+      sendRequest().then(()=>
+      history("/displaypromotion"));
+  
+    };
+      const sendRequest = async ()=>{
+        await axios
+        .put(`http://localhost:5000/promotions/${id} `,{
+            name: String(inputs.name),
+            type: String(inputs.type),
+            startDate: String(inputs.startDate),
+            endDate: String(inputs.endDate),
+        })
+        .then((res) => res.data);
+    };
+      
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(inputs);
-
-    await sendRequest().then(()=>history("/displaypromotion"))
-
-  }
-  const sendRequest = async () => {
-    await axios
-      .post("http://localhost:8070/promotions/add", {
-        name: String(inputs.name),
-        type: String(inputs.type),
-        startDate: String(inputs.startDate),
-        endDate: String(inputs.endDate),
-      })
-      .then((res) => res.data);
-  };
+    
   return (
     <React.Fragment>
-      <section>
-        <div>
-          <Nav />
-        </div>
-      </section>
+     
+    <section >
+      <div>
+        <Nav />
+      </div>
+    </section>
 
-      <section className="pl-64 pt-20 overflow-x-auto">
+    <section className="pl-64 pt-20 overflow-x-auto">
         <div className="grid grid-cols-10">
           <div className="col-span-2 bg-customBlue h-full p-4 w-50 fixed top-12 left-0">
             <Sidebar />
           </div>
           <div className="col-span-8 p-8 rounded-md shadow-md text-3xl text-center font-bold underline">
-            <h1>Add Promotion Form</h1>
+            <h1>Update Promotion Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -109,8 +124,9 @@ function AddPromotion() {
           </form>
         </div>
       </section>
-    </React.Fragment>
-  );
+    
+        </React.Fragment>
+  )
 }
 
-export default AddPromotion;
+export default UpdatePromotion;

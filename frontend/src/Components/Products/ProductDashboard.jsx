@@ -19,7 +19,7 @@ function ProductDashboard() {
     async function fetchData() {
       try {
         const response = await axios.get(
-          "http://localhost:8070/products/getAll"
+          "http://localhost:5000/products/getAll"
         );
         const products = response.data.products;
 
