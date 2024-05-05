@@ -52,7 +52,7 @@ function App() {
           <Route path="/NavbarAdmin" element={<NavbarAdmin />} />
           <Route path="/UserDashboard/:email" element={<UserDashboard />} />
           <Route path="/AdminDashboard/:email" element={<AdminDashboard />} />
-          <Route path="/Petprofile/:email" element={<Petprofile />} />
+          <Route path="/Petprofile/:microchipId" element={<Petprofile />} />
           {/* Route for UserDashboard with props */}
           <Route
             path="/UserDashboard"
@@ -60,7 +60,7 @@ function App() {
           />
           <Route
             path="/Petprofile"
-            element={<Petprofile email={window.history.state?.email} />}
+            element={<Petprofile microchipId={window.history.state?.microchipId} />}
           />
           <Route
             path="/AdminDashboard"

@@ -728,7 +728,7 @@ function UserDashboard() {
                           >
                             Delete
                           </button>&nbsp;&nbsp;
-                          <Link to={`/Petprofile/${pet.owner}`}>
+                          <Link to={`/Petprofile/${pet.microchipId}`}>
                             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                               View Pet
                             </button>

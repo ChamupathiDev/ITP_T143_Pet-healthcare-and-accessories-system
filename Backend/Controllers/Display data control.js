@@ -405,6 +405,24 @@ const getBypetId = async (req, res, next) => {
   return res.status(200).send({ pets });
 };
 
+//.....Get by  pet microchip Id......./
+const getPetsBymicrochipId = async (req, res) => {
+  const { microchipId } = req.params;
+
+  try {
+    const pets = await Pet.find({ microchipId: microchipId });
+
+    if (!pets) {
+      return res.status(404).json({ message: "Pet not found" });
+    }
+
+    return res.status(200).json({ pets });
+  } catch (err) {
+    console.error("Error retrieving user:", err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 //......Delete pet data......
 const deletepet = async (req, res, next) => {
   const id = req.params.id;
@@ -655,6 +673,7 @@ exports.addPet = addPet;
 exports.getAllPets = getAllPets;
 exports.updatepet = updatepet;
 exports.getBypetId = getBypetId;
+exports.getPetsBymicrochipId = getPetsBymicrochipId;
 exports.deletepet = deletepet;
 exports.getPetsByEmail = getPetsByEmail;
 exports.addemployee = addemployee;
