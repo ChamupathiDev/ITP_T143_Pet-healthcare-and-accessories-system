@@ -14,6 +14,11 @@ const discountSchema = new Schema({
         required: true
     },
 
+    ptype:{
+        type: String,
+        required: true
+    },
+
     type:{
         type: String,
         required: true
@@ -26,6 +31,16 @@ const discountSchema = new Schema({
 
     applicableProduct: {
         type: String,
+        required: true
+    },
+
+    startDate: {
+        type: Date,
+        required: true
+    },
+
+    endDate: {
+        type: Date,
         required: true
     }
 

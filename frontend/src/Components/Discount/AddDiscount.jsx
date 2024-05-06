@@ -9,9 +9,12 @@ function AddDiscount() {
   const [inputs, setInputs] = useState({
     psid:"",
     name: "",
+    ptype: "",
     type: "",
     amount: "",
     applicableProduct: "",
+    startDate: "",
+    endDate: "",
   });
   const handleChange = (e) => {
     
@@ -34,9 +37,12 @@ function AddDiscount() {
       .post("http://localhost:5000/discounts/add", {
         psid: String(inputs.psid),
         name: String(inputs.name),
+        ptype: String(inputs.ptype),
         type: String(inputs.type),
         amount: inputs.amount,
         applicableProduct: String(inputs.applicableProduct),
+        startDate: inputs.startDate,
+        endDate: inputs.endDate,
       })
       .then((res) => res.data);
   };
@@ -81,6 +87,18 @@ function AddDiscount() {
              </div>
 
              <div className="mb-4">
+            <label className="font-bold">Promotion Type:</label>
+            <input
+              type="text"
+              name="ptype"
+              onChange={handleChange}
+              value={inputs.ptype}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
+
+             <div className="mb-4">
             <label className="font-bold">Discount Type:</label>
             <br />
             <input
@@ -113,6 +131,31 @@ function AddDiscount() {
               name="applicableProduct"
               onChange={handleChange}
               value={inputs.applicableProduct}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            />
+            </div>
+
+            <div className="mb-4">
+            <label className="font-bold">Start Date</label>
+            <br />
+            <input
+              type="Date"
+              name="startDate"
+              onChange={handleChange}
+              value={inputs.startDate}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            />
+            </div>
+            <div className="mb-4">
+            <label className="font-bold">End Date</label>
+            <br />
+            <input
+              type="Date"
+              name="endDate"
+              onChange={handleChange}
+              value={inputs.endDate}
               className="border border-black p-2 w-full rounded-xl"
               required
             />

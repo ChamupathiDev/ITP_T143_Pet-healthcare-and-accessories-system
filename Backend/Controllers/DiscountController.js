@@ -21,12 +21,12 @@ const getAlldiscounts = async(req, res, next) =>{
 //data insert
 const adddiscounts = async (req, res, next) =>{
 
-    const {psid,name, type, amount, applicableProduct} = req.body;
+    const {psid,name, ptype, type, amount, applicableProduct, startDate, endDate} = req.body;
 
     let discounts;
 
     try{
-        discounts = new discount({psid,name, type, amount, applicableProduct});
+        discounts = new discount({psid,name, type, amount, applicableProduct, startDate, endDate});
         await discounts.save();
     } catch (err){
         console.log(err);
@@ -62,12 +62,12 @@ const getById = async (req, res, next) => {
 const updateDiscount = async (req, res, next) =>{
 
     const id = req.params.id;
-    const {psid,name, type, amount, applicableProduct} = req.body;
+    const {psid,name, ptype, type, amount, applicableProduct, startDate,endDate} = req.body;
 
     let discounts;
 
     try{
-        discounts = await discount.findByIdAndUpdate(id, {psid:psid, name: name, type:type, amount:amount, applicableProduct:applicableProduct});
+        discounts = await discount.findByIdAndUpdate(id, {psid:psid, name: name,ptype:ptype, type:type, amount:amount, applicableProduct:applicableProduct, startDate:startDate, endDate:endDate});
         discounts = await discounts.save();
     } catch(err){
         console.log(err);

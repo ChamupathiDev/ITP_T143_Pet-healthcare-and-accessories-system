@@ -9,9 +9,12 @@ function Discount(props) {
     _id,
     psid,
     name,
+    ptype,
     type,
     amount,
     applicableProduct,
+    startDate,
+    endDate,
    
   } = props.discount;
   
@@ -35,11 +38,16 @@ function Discount(props) {
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={name}>
         {name}
       </td>
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={ptype}>
+        {ptype}
+      </td>
      
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md text-center">{type}</td>
       
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md text-center">{amount}</td>
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md ">{applicableProduct}</td>
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md ">{startDate}</td>
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md ">{endDate}</td>
      
       <td className="px-2 py-2 border border-solid border-gray-400 rounded-md shadow-md print:hidden">
         <Link to={`/displaydiscount/${_id}`}>

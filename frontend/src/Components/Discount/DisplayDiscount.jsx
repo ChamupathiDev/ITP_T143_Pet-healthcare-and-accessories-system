@@ -84,7 +84,9 @@ function DisplayDiscount() {
 
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">PSID</th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">Name</th>
-                   
+                    <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
+                      Promotion Type
+                    </th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
                       Discount Type
                     </th>
@@ -94,6 +96,13 @@ function DisplayDiscount() {
                     </th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
                       Applicable Product
+                    </th>
+                    <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
+                      Start Date
+                    </th>
+
+                    <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">
+                      End Date
                     </th>
                    
                     <th className="px-1 py-1 border border-solid border-gray-400 rounded-md shadow-md print:hidden">Edit</th>

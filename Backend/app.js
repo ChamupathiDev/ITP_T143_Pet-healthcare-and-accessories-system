@@ -8,7 +8,6 @@ const path = require('path');
 const twilio = require("twilio");
 
 const router = require("./Routes/PetProductRoutes");
-const promorouter = require("./Routes/PromotionRoutes");
 const disrouter = require("./Routes/DiscountRoutes");
 const rerouter = require("./Routes/ReorderRoutes");
 const app = express();
@@ -23,7 +22,6 @@ app.use (bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/files', express.static('files'));
 app.use("/products",router);
-app.use("/promotions",promorouter);
 app.use("/discounts",disrouter);
 app.use("/reorders",rerouter);
 

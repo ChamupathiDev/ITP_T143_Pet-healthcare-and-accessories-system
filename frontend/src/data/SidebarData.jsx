@@ -16,12 +16,6 @@ export const SidebarData=[
     },
 
     {
-        title: "Promotion",
-        path:"/displaypromotion",
-        icon: <FaGift/>,
-    },
-
-    {
         title: "Discounts",
         path:"/displaydiscount",
         icon: <FaPercentage/>,
