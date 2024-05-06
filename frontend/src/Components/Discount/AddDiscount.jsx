@@ -7,6 +7,7 @@ import axios from "axios";
 function AddDiscount() {
   const history = useNavigate();
   const [inputs, setInputs] = useState({
+    psid:"",
     name: "",
     type: "",
     amount: "",
@@ -31,6 +32,7 @@ function AddDiscount() {
   const sendRequest = async () => {
     await axios
       .post("http://localhost:5000/discounts/add", {
+        psid: String(inputs.psid),
         name: String(inputs.name),
         type: String(inputs.type),
         amount: inputs.amount,
@@ -55,6 +57,17 @@ function AddDiscount() {
             <h1>Add Discount Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="font-bold">PSID:</label>
+            <input
+              type="text"
+              name="name"
+              onChange={handleChange}
+              value={inputs.psid}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
           <div className="mb-4">
             <label className="font-bold">Name:</label>
             <input

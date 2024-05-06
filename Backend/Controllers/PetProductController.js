@@ -21,12 +21,12 @@ const getAllproducts = async(req, res, next) =>{
 //data insert
 const addproducts = async (req, res, next) =>{
 
-    const {name,image, description, price, quantity, manufactureDate,expireDate, stockAlertThreshold, reorderPoint, category, brand} = req.body;
+    const {ppid,name,image, description, price, quantity, manufactureDate,expireDate, stockAlertThreshold, reorderPoint, category, brand} = req.body;
 
     let products;
 
     try{
-        products = new product({name,image, description, price, quantity, manufactureDate,expireDate, stockAlertThreshold, reorderPoint, category, brand});
+        products = new product({ppid,name,image, description, price, quantity, manufactureDate,expireDate, stockAlertThreshold, reorderPoint, category, brand});
         await products.save();
     } catch (err){
         console.log(err);
@@ -62,12 +62,12 @@ const getById = async (req, res, next) => {
 const updateProduct = async (req, res, next) =>{
 
     const id = req.params.id;
-    const {name,image, description, price, quantity, manufactureDate,expireDate, stockAlertThreshold, reorderPoint, category, brand} = req.body;
+    const {ppid,name,image, description, price, quantity, manufactureDate,expireDate, stockAlertThreshold, reorderPoint, category, brand} = req.body;
 
     let products;
 
     try{
-        products = await product.findByIdAndUpdate(id, {name: name, image:image, description: description, price: price, quantity:quantity, manufactureDate:manufactureDate, expireDate:expireDate, stockAlertThreshold: stockAlertThreshold, reorderPoint: reorderPoint, 
+        products = await product.findByIdAndUpdate(id, {ppid:ppid, name: name, image:image, description: description, price: price, quantity:quantity, manufactureDate:manufactureDate, expireDate:expireDate, stockAlertThreshold: stockAlertThreshold, reorderPoint: reorderPoint, 
         category: category, brand:brand});
         products = await products.save();
     } catch(err){

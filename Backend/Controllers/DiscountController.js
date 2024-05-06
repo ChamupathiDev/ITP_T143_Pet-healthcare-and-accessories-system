@@ -21,12 +21,12 @@ const getAlldiscounts = async(req, res, next) =>{
 //data insert
 const adddiscounts = async (req, res, next) =>{
 
-    const {name, type, amount, applicableProduct} = req.body;
+    const {psid,name, type, amount, applicableProduct} = req.body;
 
     let discounts;
 
     try{
-        discounts = new discount({name, type, amount, applicableProduct});
+        discounts = new discount({psid,name, type, amount, applicableProduct});
         await discounts.save();
     } catch (err){
         console.log(err);
@@ -62,12 +62,12 @@ const getById = async (req, res, next) => {
 const updateDiscount = async (req, res, next) =>{
 
     const id = req.params.id;
-    const {name, type, amount, applicableProduct} = req.body;
+    const {psid,name, type, amount, applicableProduct} = req.body;
 
     let discounts;
 
     try{
-        discounts = await discount.findByIdAndUpdate(id, {name: name, type:type, amount:amount, applicableProduct:applicableProduct});
+        discounts = await discount.findByIdAndUpdate(id, {psid:psid, name: name, type:type, amount:amount, applicableProduct:applicableProduct});
         discounts = await discounts.save();
     } catch(err){
         console.log(err);
@@ -75,7 +75,7 @@ const updateDiscount = async (req, res, next) =>{
 
     //not update discount
     if(!discounts){
-        return res.status(404).send({message: "promotion not update"});
+        return res.status(404).send({message: "discount not update"});
     }
     return res.status(200).json({discounts})
 

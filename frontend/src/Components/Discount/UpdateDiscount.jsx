@@ -36,6 +36,7 @@ function UpdateDiscount() {
   const sendRequest = async () => {
     await axios
       .put(`http://localhost:5000/discounts/${id} `, {
+        psid: String(inputs.psid),
         name: String(inputs.name),
         type: String(inputs.type),
         amount: inputs.amount,
@@ -61,6 +62,28 @@ function UpdateDiscount() {
             <h1>Update Discount Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="font-bold">PSID:</label>
+            <input
+              type="text"
+              name="psid"
+              onChange={handleChange}
+              value={inputs.psid}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
+          <div className="mb-4">
+            <label className="font-bold">Name:</label>
+            <input
+              type="text"
+              name="name"
+              onChange={handleChange}
+              value={inputs.name}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
           <div className="mb-4">
             <label className="font-bold">Name:</label>
             <input

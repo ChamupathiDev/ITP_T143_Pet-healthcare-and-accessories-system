@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 function Discount(props) {
   const {
     _id,
+    psid,
     name,
     type,
     amount,
@@ -27,8 +28,9 @@ function Discount(props) {
   
   return (
     <tr>
-      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={_id}>
-        {_id}
+
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={psid}>
+        {psid}
       </td>
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={name}>
         {name}

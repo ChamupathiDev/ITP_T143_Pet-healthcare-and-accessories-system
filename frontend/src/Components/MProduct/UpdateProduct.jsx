@@ -84,6 +84,7 @@ function UpdateProduct() {
       const sendRequest = async ()=>{
         await axios
         .put(`http://localhost:5000/products/${id} `,{
+          ppid: String(inputs.ppid),
           name: String(inputs.name),
           image: String(inputs.image.name),
           description: String(inputs.description),
@@ -118,6 +119,17 @@ function UpdateProduct() {
             <h1>Update Product Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl border-opacity-30" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="font-bold">PPID:</label>
+            <input
+              type="text"
+              name="ppid"
+              onChange={handleChange}
+              value={inputs.ppid}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
           <div className="mb-4">
             <label className="font-bold">Name:</label>
             <input

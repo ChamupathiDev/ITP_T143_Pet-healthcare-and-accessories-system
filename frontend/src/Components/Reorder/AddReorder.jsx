@@ -7,6 +7,7 @@ import axios from "axios";
 function AddReorder() {
   const history = useNavigate();
   const [inputs, setInputs] = useState({
+    prid: "",
     name: "",
     reorderQuantity: "",
     supplierName: "",
@@ -31,6 +32,7 @@ function AddReorder() {
   const sendRequest = async () => {
     await axios
       .post("http://localhost:5000/reorders/add", {
+        prid: String(inputs.prid),
         name: String(inputs.name),
         reorderQuantity: inputs.reorderQuantity,
         supplierName: String(inputs.supplierName),
@@ -55,6 +57,17 @@ function AddReorder() {
             <h1>Add Reorder Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="font-bold">PRID:</label>
+            <input
+              type="text"
+              name="prid"
+              onChange={handleChange}
+              value={inputs.prid}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
           <div className="mb-4">
             <label className="font-bold">Name:</label>
             <input

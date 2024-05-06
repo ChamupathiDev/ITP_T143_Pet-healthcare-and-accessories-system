@@ -59,7 +59,7 @@ function Nav() {
               {products
                 .filter((product) => product.quantity <= product.stockAlertThreshold)
                 .map((product) => (
-                  <li key={product._id} className="rounded-t-lg border-b border-gray-200 py-4 px-4">
+                  <li key={product.ppid} className="rounded-t-lg border-b border-gray-200 py-4 px-4">
                     {product.name} - Quantity: {product.quantity}
                   </li>
                 ))}

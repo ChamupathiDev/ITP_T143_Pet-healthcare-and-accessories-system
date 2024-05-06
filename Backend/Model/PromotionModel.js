@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const promotionSchema = new Schema({
 
+    pmid:{
+        type: String,
+        required: true
+    },
+
     name:{
         type: String,
         required: true

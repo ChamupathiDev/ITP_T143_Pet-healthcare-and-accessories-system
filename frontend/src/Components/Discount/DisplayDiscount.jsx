@@ -81,7 +81,8 @@ function DisplayDiscount() {
               <table className="table-auto w-full border-collapse border">
                 <thead>
                   <tr className="bg-gray-200">
-                    <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">ID</th>
+
+                    <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">PSID</th>
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">Name</th>
                    
                     <th className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md">

@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 function Product(props) {
   const {
     _id,
+    ppid,
     name,
     image,
     description,
@@ -37,8 +38,9 @@ function Product(props) {
   
   return (
     <tr>
-      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={_id}>
-        {truncateText(_id, 5)}
+     
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={ppid}>
+        {ppid}
       </td>
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={name}>
         {truncateText(name, 10)}

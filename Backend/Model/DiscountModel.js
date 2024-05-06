@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const discountSchema = new Schema({
 
+    psid:{
+        type: String,
+        required: true
+    },
+
     name:{
         type: String,
         required: true

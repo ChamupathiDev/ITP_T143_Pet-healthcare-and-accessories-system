@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const reorderSchema = new Schema({
 
+    prid:{
+        type: String,
+        required: true
+    },
+
     name:{
         type: String,
         required: true

@@ -7,6 +7,7 @@ import axios from "axios";
 function AddPromotion() {
   const history = useNavigate();
   const [inputs, setInputs] = useState({
+    pmid: "",
     name: "",
     type: "",
     startDate: "",
@@ -31,6 +32,7 @@ function AddPromotion() {
   const sendRequest = async () => {
     await axios
       .post("http://localhost:5000/promotions/add", {
+        pmid: String(inputs.pmid),
         name: String(inputs.name),
         type: String(inputs.type),
         startDate: String(inputs.startDate),
@@ -55,6 +57,17 @@ function AddPromotion() {
             <h1>Add Promotion Form</h1>
           </div>
           <form className="col-span-8 p-8  mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="font-bold">PMID:</label>
+            <input
+              type="text"
+              name="pmid"
+              onChange={handleChange}
+              value={inputs.pmid}
+              className="border border-black p-2 w-full rounded-xl"
+              required
+            ></input>
+             </div>
           <div className="mb-4">
             <label className="font-bold">Name:</label>
             <input

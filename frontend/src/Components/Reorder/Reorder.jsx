@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 function Reorder(props) {
   const {
     _id,
+    prid,
     name,
     reorderQuantity,
     supplierName,
@@ -27,8 +28,9 @@ function Reorder(props) {
   
   return (
     <tr>
-      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={_id}>
-        {_id}
+     
+      <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={prid}>
+        {prid}
       </td>
       <td className="px-4 py-2 border border-solid border-gray-400 rounded-md shadow-md" title={name}>
         {name}

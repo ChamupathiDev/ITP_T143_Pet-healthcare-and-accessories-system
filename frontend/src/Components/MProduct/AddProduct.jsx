@@ -9,6 +9,7 @@ function AddProduct() {
   const [errors, setErrors] = useState({});
 
   const [inputs, setInputs] = useState({
+    ppid: "",
     name: "",
     image: "",
     description: "",
@@ -85,6 +86,7 @@ function AddProduct() {
   const sendRequest = async () => {
     await axios
       .post("http://localhost:5000/products/add", {
+        ppid: String(inputs.ppid),
         name: String(inputs.name),
         image: String(inputs.image.name),
         description: String(inputs.description),
@@ -119,6 +121,18 @@ function AddProduct() {
             className="col-span-8 p-8 mt-4 rounded-md shadow-3xl border border-blue-700 border-blur-3xl border-opacity-30"
             onSubmit={handleSubmit}
           >
+            <div className="mb-4">
+              <label className="font-bold">PPID:</label>
+              <input
+                type="text"
+                name="ppid"
+                onChange={handleChange}
+                value={inputs.ppid}
+                className="border border-black p-2 w-full rounded-xl"
+                required
+              />
+              
+            </div>
             <div className="mb-4">
               <label className="font-bold">Name:</label>
               <input

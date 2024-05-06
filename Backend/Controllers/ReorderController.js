@@ -21,12 +21,12 @@ const getAllreorders = async(req, res, next) =>{
 //data insert
 const addreorders = async (req, res, next) =>{
 
-    const {name, reorderQuantity, supplierName, supplierNo} = req.body;
+    const {prid,name, reorderQuantity, supplierName, supplierNo} = req.body;
 
     let reorders;
 
     try{
-        reorders = new reorder({name, reorderQuantity, supplierName, supplierNo});
+        reorders = new reorder({prid,prid,name, reorderQuantity, supplierName, supplierNo});
         await reorders.save();
     } catch (err){
         console.log(err);
@@ -62,12 +62,12 @@ const getById = async (req, res, next) => {
 const updateReorder = async (req, res, next) =>{
 
     const id = req.params.id;
-    const {name, reorderQuantity, supplierName, supplierNo} = req.body;
+    const {prid,name, reorderQuantity, supplierName, supplierNo} = req.body;
 
     let reorders;
 
     try{
-        reorders = await reorder.findByIdAndUpdate(id, {name:name, reorderQuantity:reorderQuantity, supplierName:supplierName, supplierNo:supplierNo});
+        reorders = await reorder.findByIdAndUpdate(id, {prid:prid, name:name, reorderQuantity:reorderQuantity, supplierName:supplierName, supplierNo:supplierNo});
         reorders = await reorders.save();
     } catch(err){
         console.log(err);

@@ -21,12 +21,12 @@ const getAllpromotions = async(req, res, next) =>{
 //data insert
 const addpromotions = async (req, res, next) =>{
 
-    const {name, type, startDate, endDate} = req.body;
+    const {pmid, name, type, startDate, endDate} = req.body;
 
     let promotions;
 
     try{
-        promotions = new promotion({name, type, startDate, endDate});
+        promotions = new promotion({pmid,name, type, startDate, endDate});
         await promotions.save();
     } catch (err){
         console.log(err);
@@ -62,12 +62,12 @@ const getById = async (req, res, next) => {
 const updatePromotion = async (req, res, next) =>{
 
     const id = req.params.id;
-    const {name, type, startDate, endDate} = req.body;
+    const {pmid,name, type, startDate, endDate} = req.body;
 
     let promotions;
 
     try{
-        promotions = await promotion.findByIdAndUpdate(id, {name: name, type:type, startDate:startDate, endDate:endDate});
+        promotions = await promotion.findByIdAndUpdate(id, {pmid:pmid, name: name, type:type, startDate:startDate, endDate:endDate});
         promotions = await promotions.save();
     } catch(err){
         console.log(err);
