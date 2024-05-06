@@ -135,8 +135,8 @@ const PetProfile = () => {
                     style={{
                       maxWidth: "200px",
                       borderRadius: "50%",
-                      display: "block", // Ensures the image is treated as a block element
-                      margin: "0 auto", // Centers the image horizontally
+                      display: "block", 
+                      margin: "0 auto", 
                     }}
                   />
                 </div>

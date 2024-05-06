@@ -6,7 +6,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-
 import {
   FaDog,
   FaPlus,
@@ -39,18 +38,18 @@ function AdminDashboard() {
   }, []);
 
   //DELETE pet
-const deleteemployees = async (_id) => {
+  const deleteemployees = async (_id) => {
     try {
       await axios.delete(`${URL}/${_id}`);
       // After deletion, fetch the updated list of users
-      const updateemployees = employee.filter((employees) => employees._id !== _id);
+      const updateemployees = employee.filter(
+        (employees) => employees._id !== _id
+      );
       setEmployee(updateemployees);
     } catch (error) {
       console.error("Error deleting employees:", error);
     }
   };
-
-
 
   const generateRandomColor = () => {
     // Generate random values for RGB components (spread out across the middle range)
@@ -81,7 +80,7 @@ const deleteemployees = async (_id) => {
       }
     };
     fetchEmployeesDetails();
-  }, [email]);
+  }, [userEmail]);
 
   return (
     <div className="h-screen">
@@ -98,7 +97,6 @@ const deleteemployees = async (_id) => {
           </div>
           <div style={{ position: "absolute", top: "150px" }}>
             <ul>
-
               <li className="mb-4">
                 <a
                   href="/Adduser"
@@ -168,7 +166,6 @@ const deleteemployees = async (_id) => {
                   Media Library
                 </a>
               </li>
-
             </ul>
           </div>
         </nav>
@@ -178,7 +175,10 @@ const deleteemployees = async (_id) => {
           {employee ? (
             <>
               <h1 className="text-3xl font-bold mb-4">
-                <center>Welcome, {employee.fullName}<font style = {{fontSize:"12px"}}> [Admin]</font></center>
+                <center>
+                  Welcome, {employee.fullName}
+                  <font style={{ fontSize: "12px" }}> [Admin]</font>
+                </center>
               </h1>
 
               <div
@@ -189,36 +189,41 @@ const deleteemployees = async (_id) => {
                 </p>
               </div>
 
-              <div
-                style={{ position: "absolute", top: "15px", left: "750px"}}
-              >
-                <p style={{fontSize:"20px", color: "white",fontWeight: "bold"}}>Admin Dashboard</p>
+              <div style={{ position: "absolute", top: "15px", left: "750px" }}>
+                <p
+                  style={{
+                    fontSize: "20px",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Admin Dashboard
+                </p>
               </div>
 
               <div
                 style={{ position: "absolute", top: "12px", left: "1450px" }}
               >
                 <input
-    type="text"
-    value={
-      employee && employee.fullName 
-            ? employee.fullName.charAt(0).toUpperCase() 
-            : '' 
-    }
-    style={{
-        fontSize: "16px",
-        color: "black",
-        backgroundColor: generateBackgroundColor(),
-        width: "37px",
-        height: "37px",
-        borderRadius: "50%",
-        border: "2px solid #06abcc",
-        textAlign: "center",
-        fontWeight: "bold", // Make the text bold
-    }}
-    readOnly // Make the input field read-only
-/>
-
+                  type="text"
+                  value={
+                    employee && employee.fullName
+                      ? employee.fullName.charAt(0).toUpperCase()
+                      : ""
+                  }
+                  style={{
+                    fontSize: "16px",
+                    color: "black",
+                    backgroundColor: generateBackgroundColor(),
+                    width: "37px",
+                    height: "37px",
+                    borderRadius: "50%",
+                    border: "2px solid #06abcc",
+                    textAlign: "center",
+                    fontWeight: "bold", // Make the text bold
+                  }}
+                  readOnly // Make the input field read-only
+                />
               </div>
 
               <div>
@@ -259,7 +264,9 @@ const deleteemployees = async (_id) => {
                   >
                     {/* Display the image */}
                     <img
-                      src={`http://localhost:5000/profileimage/${employee.userimage}`}
+                      src={`http://localhost:5000/profileimage/${
+                        employee.userimage || "default.jpg"
+                      }`}
                       alt="User Image"
                       style={{ maxWidth: "180px", borderRadius: "50%" }}
                     />
@@ -286,7 +293,8 @@ const deleteemployees = async (_id) => {
                         htmlFor="employeeID"
                         style={{ fontSize: "14px", fontFamily: "cursive" }}
                       >
-                        Employee ID :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Employee ID
+                        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       </label>
                       <input
                         type="text"
@@ -495,7 +503,8 @@ const deleteemployees = async (_id) => {
                           textDecoration: "bolder",
                         }}
                       >
-                        Email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Email
+                        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       </label>
                       <input
                         type="text"
@@ -524,7 +533,8 @@ const deleteemployees = async (_id) => {
                           textDecoration: "bolder",
                         }}
                       >
-                        job Title :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        job Title
+                        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       </label>
                       <input
                         type="text"
@@ -553,8 +563,7 @@ const deleteemployees = async (_id) => {
                           textDecoration: "bolder",
                         }}
                       >
-                        Department
-                        :&nbsp;&nbsp;&nbsp;&nbsp;
+                        Department :&nbsp;&nbsp;&nbsp;&nbsp;
                       </label>
                       <input
                         type="text"
@@ -583,8 +592,7 @@ const deleteemployees = async (_id) => {
                           textDecoration: "bolder",
                         }}
                       >
-                        job Status
-                        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        job Status :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       </label>
                       <input
                         type="text"

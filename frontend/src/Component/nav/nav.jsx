@@ -102,9 +102,8 @@ const NavBar = () => {
           </Nav.Link>
 
           <NavDropdown title="Login or Sign Up" style={{ color: "white" }}> {/* Text color */}
-            <NavDropdown.Item onClick={toggleLogin}>Login</NavDropdown.Item>
-            <NavDropdown.Item href="/AdminLogin">Admin Login</NavDropdown.Item>
-            <NavDropdown.Item href="/adduser">Register</NavDropdown.Item>
+            <NavDropdown.Item href="/AdminLogin">User Login</NavDropdown.Item>
+            <NavDropdown.Item href="/adduser"> User Register</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/mainhome">Log Out</NavDropdown.Item>
           </NavDropdown>

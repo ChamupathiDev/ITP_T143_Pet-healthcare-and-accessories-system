@@ -8,7 +8,6 @@ const Mailgen = require("mailgen");
 const Pet = require("../Model/Pet Model");
 const Employees = require("../Model/Admin Model");
 
-
 //......Display data......
 const getAllUsers = async (req, res, next) => {
   let Users;
@@ -557,7 +556,7 @@ const getemployeesByEmail = async (req, res) => {
   const { email } = req.params;
 
   try {
-    const employees = await Employees.findOne({ email });
+    const employees = await Employees.findOne({ email: email });
 
     if (!employees) {
       return res.status(404).json({ message: "Employees not found" });

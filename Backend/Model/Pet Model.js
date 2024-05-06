@@ -62,6 +62,10 @@ const petSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  registeredDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Pet_details", petSchema);

@@ -3,6 +3,7 @@ import Navbar from "../nav/nav";
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
 import { Link } from "react-router-dom";
+import { Pie } from "react-chartjs-2";
 
 const URL = "http://localhost:5000/employees";
 
@@ -13,12 +14,27 @@ const fetchHandler = async () => {
 function ViewEmployees() {
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [departmentCounts, setDepartmentCounts] = useState({});
+  const [jobTitleCounts, setJobTitleCounts] = useState({});
+  const [departmentChartData, setDepartmentChartData] = useState(null);
+  const [jobTitleChartData, setJobTitleChartData] = useState(null);
 
   useEffect(() => {
-    fetchHandler().then((data) => setEmployees(data.employees));
+    fetchHandler().then((data) => {
+      setEmployees(data.employees);
+      countEmployeesByDepartment(data.employees);
+      countEmployeesByJobTitle(data.employees);
+    });
   }, []);
 
+  useEffect(() => {
+    renderDepartmentChart();
+    renderJobTitleChart();
+  }, [departmentCounts, jobTitleCounts]);
+
   const ComponentsRef = useRef();
+  const departmentChartRef = useRef();
+  const jobTitleChartRef = useRef();
 
   //--- Create Pdf ---
   const handlePrint = useReactToPrint({
@@ -33,35 +49,107 @@ function ViewEmployees() {
       await axios.delete(`${URL}/${_id}`);
       // After deletion, fetch the updated list of users
       const updateemployees = employees.filter(
-        (employees) => employees._id !== _id
+        (employee) => employee._id !== _id
       );
       setEmployees(updateemployees);
+      countEmployeesByDepartment(updateemployees);
+      countEmployeesByJobTitle(updateemployees);
     } catch (error) {
       console.error("Error deleting employees:", error);
     }
   };
 
+  // Count employees by department
+  const countEmployeesByDepartment = (employees) => {
+    const counts = employees.reduce((acc, employee) => {
+      acc[employee.department] = (acc[employee.department] || 0) + 1;
+      return acc;
+    }, {});
+    setDepartmentCounts(counts);
+  };
+
+  // Count employees by job title
+  const countEmployeesByJobTitle = (employees) => {
+    const counts = employees.reduce((acc, employee) => {
+      acc[employee.jobTitle] = (acc[employee.jobTitle] || 0) + 1;
+      return acc;
+    }, {});
+    setJobTitleCounts(counts);
+  };
+
   //--- Create Search ---
   const handleSearch = () => {
     fetchHandler().then((data) => {
-      const filteredEmployees = data.employees.filter((employees) =>
-        Object.values(employees).some((field) =>
+      const filteredEmployees = data.employees.filter((employee) =>
+        Object.values(employee).some((field) =>
           field.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
       );
       setEmployees(filteredEmployees);
+      countEmployeesByDepartment(filteredEmployees);
+      countEmployeesByJobTitle(filteredEmployees);
     });
+  };
+
+  // Function to render department chart
+  const renderDepartmentChart = () => {
+    const labels = Object.keys(departmentCounts);
+    const data = Object.values(departmentCounts);
+
+    const chartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(54, 162, 235, 0.6)",
+            "rgba(255, 206, 86, 0.6)",
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(153, 102, 255, 0.6)",
+            "rgba(255, 159, 64, 0.6)",
+          ],
+        },
+      ],
+    };
+
+    setDepartmentChartData(chartData);
+  };
+
+  // Function to render job title chart
+  const renderJobTitleChart = () => {
+    const labels = Object.keys(jobTitleCounts);
+    const data = Object.values(jobTitleCounts);
+
+    const chartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(54, 162, 235, 0.6)",
+            "rgba(255, 206, 86, 0.6)",
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(153, 102, 255, 0.6)",
+            "rgba(255, 159, 64, 0.6)",
+          ],
+        },
+      ],
+    };
+
+    setJobTitleChartData(chartData);
   };
 
   return (
     <div>
       <Navbar />
-      &nbsp;
+      &nbsp;<br/><br/>
       <center>
         <h1>Employee Details</h1>
       </center>
       <div
-        className="seachbar"
+        className="searchbar"
         style={{ position: "relative", top: "-20px", left: "1100px" }}
       >
         <input //--- Search Bar ---
@@ -79,68 +167,99 @@ function ViewEmployees() {
         </button>
       </div>
       <div
-        className="flex justify-center mt-10"
-        style={{ width: "1440px", position: "absolute", left: "50px" }}
+        className="flex justify-center mt-0"
+        style={{
+          width: "1400px",
+          position: "absolute",
+          left: "50px",
+          top: "500px",
+        }}
       >
         <div ref={ComponentsRef}>
-          <table className="border-4 border-collapse w-99">
+          <table className="border-4 border-collapse w-110">
             <thead>
               <tr>
-                <th className="border p-2">User Image</th>
-                <th className="border p-2">Employee RegNo</th>
-                <th className="border p-2">FullName</th>
-                <th className="border p-2">Gender</th>
-                <th className="border p-2">Date Of Birth</th>
-                <th className="border p-2">Address</th>
-                <th className="border p-2">Phone Number</th>
-                <th className="border p-2">Email</th>
-                <th className="border p-2">job Title</th>
-                <th className="border p-2">Department</th>
-                <th className="border p-2">Start Date</th>
-                <th className="border p-2">Employment Status</th>
-                <th className="border p-2">password</th>
+                <th className="border p-2">
+                  <center>User Image</center>
+                </th>
+                <th className="border p-2">
+                  <center>Employee RegNo</center>
+                </th>
+                <th className="border p-2">
+                  <center>FullName</center>
+                </th>
+                <th className="border p-2">
+                  <center>Gender</center>
+                </th>
+                <th className="border p-2">
+                  <center>Date Of Birth</center>
+                </th>
+                <th className="border p-2">
+                  <center>Address</center>
+                </th>
+                <th className="border p-2">
+                  <center>Phone Number</center>
+                </th>
+                <th className="border p-2">
+                  <center>Email</center>
+                </th>
+                <th className="border p-2">
+                  <center>job Title</center>
+                </th>
+                <th className="border p-2">
+                  <center>Department</center>
+                </th>
+                <th className="border p-2">
+                  <center>Start Date</center>
+                </th>
+                <th className="border p-2">
+                  <center>Employment Status</center>
+                </th>
+                <th className="border p-2">
+                  <center>password</center>
+                </th>
                 <th className="print:hidden">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <center>Actions</center>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {employees.map((employees) => (
-                <tr key={employees._id}>
+              {employees.map((employee) => (
+                <tr key={employee._id}>
                   <td className="border p-2">
                     <img
-                      src={`http://localhost:5000/profileimage/${employees.userimage}`}
-                      alt="User Image"
+                      src={`http://localhost:5000/profileimage/${employee.userimage}`}
+                      alt="User"
                       style={{ maxWidth: "50px", borderRadius: "50%" }}
                     />
                   </td>
-                  <td className="border p-2">{employees.employeeID}</td>
-                  <td className="border p-2">{employees.fullName}</td>
-                  <td className="border p-2">{employees.gender}</td>
-                  <td className="border p-2">{employees.dateOfBirth}</td>
-                  <td className="border p-2">{employees.address}</td>
-                  <td className="border p-2">{employees.phoneNumber}</td>
-                  <td className="border p-2">{employees.email}</td>
-                  <td className="border p-2">{employees.jobTitle}</td>
-                  <td className="border p-2">{employees.department}</td>
-                  <td className="border p-2">{employees.startDate}</td>
-                  <td className="border p-2">{employees.employmentStatus}</td>
-                  <td className="border p-2">{employees.password}</td>
-                  <td className="print:hidden">
-                    &nbsp;&nbsp;
-                    <Link to={`/AdminDashboard/${employees.email}`}>
+                  <td className="border p-2">{employee.employeeID}</td>
+                  <td className="border p-2">{employee.fullName}</td>
+                  <td className="border p-2">{employee.gender}</td>
+                  <td className="border p-2">{employee.dateOfBirth}</td>
+                  <td className="border p-2">{employee.address}</td>
+                  <td className="border p-2">{employee.phoneNumber}</td>
+                  <td className="border p-2">{employee.email}</td>
+                  <td className="border p-2">{employee.jobTitle}</td>
+                  <td className="border p-2">{employee.department}</td>
+                  <td className="border p-2">{employee.startDate}</td>
+                  <td className="border p-2">{employee.employmentStatus}</td>
+                  <td className="border p-2">{employee.password}</td>
+                  <td className="print:hidden w-25">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to={`/AdminDashboard/${employee.email}`}>
                       <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                         View
                       </button>
                     </Link>
-                    <Link to={`/Updateemployee/${employees._id}`}>
+                    <Link to={`/Updateemployee/${employee._id}`}>
                       <button className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-700 mr-2">
                         Update
                       </button>
                     </Link>
                     <button
                       className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-700"
-                      onClick={() => deleteemployees(employees._id)}
+                      onClick={() => deleteemployees(employee._id)}
                     >
                       Delete
                     </button>
@@ -153,7 +272,7 @@ function ViewEmployees() {
       </div>
       <div
         className="print"
-        style={{ position: "absolute", top: "95px", left: "1350px" }}
+        style={{ position: "absolute", top: "115px", left: "1350px" }}
       >
         <button
           className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
@@ -161,6 +280,134 @@ function ViewEmployees() {
         >
           Download Report
         </button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "20px auto",
+          marginTop: "0px",
+          width: "1000px",
+        }}
+      >
+        {/* Display Department Counts */}
+        <div
+          style={{
+            width: "1320px",
+            height: "310px",
+            backgroundColor: "#D4CCBF",
+            position: "absolute",
+            left: "100px",
+            borderRadius: "40px",
+          }}
+        >
+          <hr
+            style={{
+              position: "absolute",
+              left: "670px",
+              width: "2px",
+              height: "290px",
+              backgroundColor: "#7A766E",
+              boxShadow: "4px 4px 8px rgba(0, 0, 250, 0.4)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              left: "800px",
+              height: "300px",
+              width: "450px",
+            }}
+          >
+            <h3
+              style={{
+                position: "absolute",
+                top: "30px",
+                width: "450px",
+                left: "-20px",
+              }}
+            >
+              <center>No of Employees</center>
+            </h3>
+            {Object.keys(jobTitleCounts).map((jobTitle) => (
+              <div
+                className="card m-2"
+                key={jobTitle}
+                style={{ width: "150px", height: "50px", top: "80px" }}
+              >
+                <div className="card-body" style={{ width: "500px" }}>
+                  <h5 className="card-title">
+                    {jobTitle} - {"  "}
+                    {jobTitleCounts[jobTitle]}
+                  </h5>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ position: "absolute", left: "290px", top: "70px" }}>
+            {departmentChartData && (
+              <Pie
+                data={departmentChartData}
+                ref={departmentChartRef}
+                width={400}
+                height={200}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
+            )}
+          </div>
+          {/* Display Job Title Counts */}
+          {/* Display Department Counts */}
+          <div
+            style={{
+              position: "absolute",
+              left: "100px",
+              height: "50px",
+              top: "80px",
+            }}
+          >
+            <h3
+              style={{
+                position: "absolute",
+                top: "-45px",
+                width: "450px",
+                left: "10px",
+              }}
+            >
+              <center>No of Employees in the Departments</center>
+            </h3>
+            {Object.keys(departmentCounts).map((department) => (
+              <div
+                className="card m-2"
+                key={department}
+                style={{ width: "200px", height: "50px", top: "10px" }}
+              >
+                <div className="card-body" style={{ width: "500px" }}>
+                  <h5 className="card-title">
+                    {department} - {"  "}
+                    {departmentCounts[department]}
+                  </h5>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ position: "absolute", left: "900px", top: "70px" }}>
+            {jobTitleChartData && (
+              <Pie
+                data={jobTitleChartData}
+                ref={jobTitleChartRef}
+                width={400}
+                height={200}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

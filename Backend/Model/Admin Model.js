@@ -79,6 +79,4 @@ const employeeSchema = new mongoose.Schema({
 });
 
 // Create a model using the schema
-const Employee = mongoose.model('Employee_Details', employeeSchema);
-
-module.exports = Employee;
+module.exports  = mongoose.model('Employee_Details', employeeSchema);
