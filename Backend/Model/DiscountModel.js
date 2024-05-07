@@ -6,7 +6,8 @@ const discountSchema = new Schema({
 
     psid:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     name:{
@@ -26,7 +27,8 @@ const discountSchema = new Schema({
 
     amount: {
         type: Number,
-        required: true
+        required: true,
+        min: [0, "Amount cannot be negative"]
     },
 
     applicableProduct: {
@@ -36,14 +38,32 @@ const discountSchema = new Schema({
 
     startDate: {
         type: Date,
-        required: true
+        required: true,
+        validate: {
+            validator: function(startDate) {
+              
+              return startDate && startDate.getTime() < Date.now();
+            },
+            message: "Start Date should be in the past",
+          },
     },
 
     endDate: {
         type: Date,
-        required: true
+        required: true,
+        validate: {
+            validator: function(endDate) {
+              
+              const startDate = this.startDate; 
+              return endDate && endDate.getTime() > startDate.getTime();
+            },
+            message: "End Date should be after Start Date",
+          },
     }
 
 });
 
 module.exports = mongoose.model("petdiscount",discountSchema);
+
+
+

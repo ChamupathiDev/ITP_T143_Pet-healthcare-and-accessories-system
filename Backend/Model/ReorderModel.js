@@ -6,7 +6,8 @@ const reorderSchema = new Schema({
 
     prid:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     name:{
@@ -16,7 +17,8 @@ const reorderSchema = new Schema({
 
     reorderQuantity:{
         type: String,
-        required: true
+        required: true,
+        min: [0, "Reorder Quantity cannot be negative"]
     },
 
     supplierName: {
@@ -26,7 +28,14 @@ const reorderSchema = new Schema({
 
     supplierNo: {
         type: Number,
-        required: true
+        required: true,
+        validate: {
+            validator: function(supplierNo) {
+              const phonePattern = /^\d{10}$/; // Assumes a 10-digit phone number
+              return phonePattern.test(supplierNo);
+            },
+            message: "Invalid supplier phone number format",
+          },
     }
 
 });

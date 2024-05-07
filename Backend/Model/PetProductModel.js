@@ -7,12 +7,15 @@ const productSchema = new Schema({
 
     ppid:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     name:{
         type: String,
-        required: true
+        required: true,
+        minlength: 3,
+        maxlength: 50
     },
 
     image:{
@@ -24,7 +27,9 @@ const productSchema = new Schema({
 
     description:{
         type: String,
-        required: true
+        required: true,
+        minlength: 3,
+        maxlength: 500
     },
 
     price: {

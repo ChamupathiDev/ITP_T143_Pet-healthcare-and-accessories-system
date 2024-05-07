@@ -26,7 +26,7 @@ const adddiscounts = async (req, res, next) =>{
     let discounts;
 
     try{
-        discounts = new discount({psid,name, type, amount, applicableProduct, startDate, endDate});
+        discounts = new discount({psid,name, ptype , type, amount, applicableProduct, startDate, endDate});
         await discounts.save();
     } catch (err){
         console.log(err);

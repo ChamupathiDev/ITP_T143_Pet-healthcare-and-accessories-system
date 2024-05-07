@@ -4,9 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Chart from "react-apexcharts";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBox, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faBox, faExclamationTriangle, faPercentage } from '@fortawesome/free-solid-svg-icons';
 
 function ProductDashboard() {
   
@@ -14,14 +12,29 @@ function ProductDashboard() {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [lowStockCount, setLowStockCount] = useState(0);
   const [reorderProductsCount, setReorderProductsCount] = useState(0);
+  const [activeDiscountsCount, setActiveDiscountsCount] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(
+        const productResponse = await axios.get(
           "http://localhost:5000/products/getAll"
         );
-        const products = response.data.products;
+        const discountResponse = await axios.get(
+          "http://localhost:5000/discounts/getAll"
+        );
+        console.log("Fetched products:", productResponse.data.products);
+        console.log("Fetched discounts:", discountResponse.data.discounts);
+
+        const products = productResponse.data.products;
+        const discounts = discountResponse.data.discounts;
+
+        discounts.forEach((discount) => {
+          discount.startDate = new Date(discount.startDate);
+          discount.endDate = new Date(discount.endDate);
+          discount.startDate.setHours(0, 0, 0, 0);
+          discount.endDate.setHours(0, 0, 0, 0);
+        });
 
         // Calculate total quantity
         let total = 0;
@@ -29,11 +42,9 @@ function ProductDashboard() {
         let reorderCount = 0;
         products.forEach((product) => {
           total += product.quantity;
-          console.log("Current total:", total);
           if (product.quantity < product.stockAlertThreshold) {
             lowStockCount++;
           }
-
           if (product.quantity < product.reorderPoint) {
             reorderCount++;
           }
@@ -42,9 +53,23 @@ function ProductDashboard() {
         setLowStockCount(lowStockCount);
         setReorderProductsCount(reorderCount);
 
+        // Count active discounts
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        const activeDiscounts = discounts.filter((discount) => {
+          const stDate = new Date(discount.startDate);
+         
+          const edDate = new Date(discount.endDate);
+         
+          return stDate <= currentDate && edDate >= currentDate;
+        });
+        console.log(currentDate);
+        console.log(activeDiscounts);
+        console.log("count array",activeDiscounts.length);
+        setActiveDiscountsCount(activeDiscounts.length);
+
         // Group products by category and sum their quantities
         const categories = {};
-         
         products.forEach((product) => {
           if (categories[product.category]) {
             // Add quantity to existing category
@@ -53,11 +78,7 @@ function ProductDashboard() {
             // Create new category with quantity
             categories[product.category] = product.quantity;
           }
-
-          
         });
-
-        
 
         // Prepare data for bar chart
         const cbarChartOptions = {
@@ -99,49 +120,51 @@ function ProductDashboard() {
             <Sidebar />
           </div>
           <div className="mt-4  container flex justify-center items-center ml-96 space-x-4">
-          
               <div className="card p-4 bg-customBlue rounded-md shadow-lg ml-52 flex-grow">
-              <FontAwesomeIcon icon={faBox} className="text-white text-3xl mr-2" />
+                <FontAwesomeIcon icon={faBox} className="text-white text-3xl mr-2" />
                 <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
                   Total Products Quantity
                 </h3>
                 <p className="text-xl font-bold text-white text-center">{totalQuantity}</p>
               </div>
               <div className="card p-4 bg-customBlue rounded-md shadow-lg flex-grow ">
-              <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-600 text-3xl mr-2" />
-              <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
-                Low Stock Products
-              </h3>
-              <p className="text-xl font-bold text-white text-center">{lowStockCount}</p>
-            </div>
-            <div className="card p-4 bg-customBlue rounded-md shadow-lg flex-grow">
-              <FontAwesomeIcon icon={faBox} className="text-red-500 text-3xl" />
-              <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
-                Reorder Products
-              </h3>
-              <p className="text-xl font-bold text-white text-center">{reorderProductsCount}</p>
-            </div>
-            </div>
-          
-          <div className="col-span-10 bg-white-500 h-screen">
-
-          <div className="mt-4">
-                {cbarChartData && (
-                  <div className="overflow-hidden">
-                    <Chart
-                      options={cbarChartData.options}
-                      series={cbarChartData.series}
-                      type="bar"
-                      width="1200"
-                      height="500"
-                    />
-                  </div>
-                )}
+                <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-600 text-3xl mr-2" />
+                <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
+                  Low Stock Products
+                </h3>
+                <p className="text-xl font-bold text-white text-center">{lowStockCount}</p>
+              </div>
+              <div className="card p-4 bg-customBlue rounded-md shadow-lg flex-grow">
+                <FontAwesomeIcon icon={faBox} className="text-red-500 text-3xl" />
+                <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
+                  Reorder Products
+                </h3>
+                <p className="text-xl font-bold text-white text-center">{reorderProductsCount}</p>
+              </div>
+              <div className="card p-4 bg-customBlue rounded-md shadow-lg flex-grow">
+                <FontAwesomeIcon icon={faPercentage} className="text-yellow-500 text-3xl" />
+                <h3 className="text-md font-semibold mb-2 text-white text-nowrap">
+                  Active Discounts
+                </h3>
+                <p className="text-xl font-bold text-white text-center">{activeDiscountsCount}</p>
               </div>
             </div>
+          <div className="col-span-10 bg-white-500 h-screen">
+            <div className="mt-4">
+              {cbarChartData && (
+                <div className="overflow-hidden">
+                  <Chart
+                    options={cbarChartData.options}
+                    series={cbarChartData.series}
+                    type="bar"
+                    width="1200"
+                    height="500"
+                  />
+                </div>
+              )}
             </div>
-          
-        
+          </div>
+        </div>
       </section>
     </React.Fragment>
   );

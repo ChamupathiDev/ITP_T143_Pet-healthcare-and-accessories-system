@@ -7,7 +7,9 @@ const reportSchema = new Schema({
 
     title:{
         type: String,
-        required: true
+        required: true,
+        minlength: 2,
+        maxlength: 10
     },
 
     pdf:{
