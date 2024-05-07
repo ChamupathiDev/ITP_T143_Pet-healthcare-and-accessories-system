@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import Nav from "../Nav/Nav";
+import Nav from "../Navp/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
 import Discount from "./Discount"; 

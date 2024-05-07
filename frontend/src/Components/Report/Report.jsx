@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav.jsx";
+import Nav from "../Navp/Nav";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import axios from "axios";
 import { pdfjs } from "react-pdf";

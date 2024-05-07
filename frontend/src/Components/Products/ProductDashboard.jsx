@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import Nav from "../Navp/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import Chart from "react-apexcharts";
 import axios from "axios";
